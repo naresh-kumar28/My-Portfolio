@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}About Me{% endblock %}
+
+{% block content %}
+
+<div class="text-white bg-gray-100">
+
+
+    <!-- About Section -->
+    <section class="px-10 md:px-16 py-20 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+        <!-- Left Content -->
+        <div>
+            <h1 class="text-5xl font-extrabold mb-6 text-black">
+                About <span class="text-[#bd69f5]">Me</span>
+            </h1>
+
+            <p class="text-gray-600 leading-relaxed mb-6">
+                I’m a passionate web developer & UI designer who loves building clean,
+                modern interfaces that actually feel good to use. I focus on crafting
+                experiences — not just pages.
+            </p>
+
+            <p class="text-gray-600 leading-relaxed mb-10">
+                My work blends design aesthetics with solid frontend engineering.
+                Performance, accessibility, and smooth interactions are always part
+                of the deal.
+            </p>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-2 sm:gap-6">
+
+                <div class="bg-[#bd69f5] rounded-xl sm:rounded-2xl p-3  sm:p-6 text-center">
+                    <h3 class="text-lg sm:text-3xl font-bold">3+</h3>
+                    <p class="text-white font-semibold text-[8px]  sm:text-sm whitespace-nowrap">
+                        Years Experience
+                    </p>
+                </div>
+
+                <div class="bg-[#bd69f5] rounded-xl sm:rounded-2xl p-3 sm:p-6 text-center">
+                    <h3 class="text-lg sm:text-3xl font-bold">25+</h3>
+                    <p class="text-white font-semibold text-[8px] sm:text-sm whitespace-nowrap">
+                        Projects Complete
+                    </p>
+                </div>
+
+                <div class="bg-[#bd69f5] rounded-xl sm:rounded-2xl p-3 sm:p-6 text-center">
+                    <h3 class="text-lg sm:text-3xl font-bold">100%</h3>
+                    <p class="text-white font-semibold text-[8px] sm:text-sm whitespace-nowrap">
+                        Client Satisfaction
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right Image -->
+        <div class="flex justify-center items-center">
+            <img src="{% static 'images/photo.jpg' %}" alt="Profile"
+                class="w-80 h-80 object-cover rounded-3xl shadow-2xl ring-4 ring-[#bd69f5]/40" />
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="px-16 pb-24 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-extrabold mb-10 text-[#bd69f5]">
+            Skills & Tools
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 font-bold text-lg">
+            <div class="bg-gray-800 rounded-2xl p-6 text-center">
+                <i class="fa-brands fa-html5"></i>
+                HTML
+            </div>
+            <div class="bg-gray-800 rounded-2xl p-6 text-center">
+                <i class="fa-brands fa-css3-alt"></i>
+                CSS / Tailwind
+            </div>
+            <div class="bg-gray-800 rounded-2xl p-6 text-center">
+                <i class="fa-brands fa-js"></i>
+                JavaScript
+            </div>
+            <div class="bg-gray-800 rounded-2xl p-6 text-center">
+                <i class="fa-brands fa-react"></i>
+                React
+            </div>
+            <div class="bg-gray-800 rounded-2xl p-6 text-center">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                UI / UX
+            </div>
+            <div class="bg-gray-800 rounded-2xl p-6 text-center">
+                <i class="fa-brands fa-python"></i>
+                Python
+            </div>
+            <div class="bg-gray-800 rounded-2xl p-6 text-center">
+                <i class="fa-brands fa-python"></i>
+                django
+            </div>
+            <div class="bg-gray-800 rounded-2xl p-6 text-center">
+                <i class="fa-brands fa-github"></i>
+                Git & GitHub
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="sm:px-16 px-8 pb-24 max-w-7xl mx-auto text-center">
+        <div class="bg-[#bd69f5] rounded-3xl p-12">
+            <h2 class="text-3xl font-extrabold mb-4">Want to work together?</h2>
+            <p class=" mb-6">
+                I’m open to freelance work, collaborations, and cool ideas.
+            </p>
+            <a href="{% url 'contact' %}"
+                class="inline-block bg-gray-800 px-10 py-3 rounded-xl font-semibold transition transform hover:scale-105">
+                Contact Me
+            </a>
+        </div>
+    </section>
+</div>
+
+{% endblock %}

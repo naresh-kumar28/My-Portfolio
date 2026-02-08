@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Contact Us{% endblock %}
+
+{% block content %}
+
+<div class="bg-gray-100 text-white">
+
+    <!-- Contact Section -->
+    <section class="px-10 md:px-16 py-14 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+
+        <!-- Left Info -->
+        <div>
+            <h1 class="text-5xl font-extrabold mb-6 text-black">
+                Let’s <span class="text-[#bd69f5]">Talk</span>
+            </h1>
+
+            <p class="text-gray-700 mb-8 leading-relaxed">
+                Got a project, idea, or just want to say hi?
+                Drop a message — I usually reply faster than your Wi-Fi reconnects.
+            </p>
+
+            <!-- Contact Info -->
+            <div class="w-full h-85 overflow-hidden rounded-3xl shadow-2xl ring-4 ring-[#bd69f5]/40">
+                <img src="{% static 'images/contact.avif' %}" alt="Profile" class=" object-fit" />
+            </div>
+
+        </div>
+
+        <!-- Right Form -->
+        <div class="bg-[#bd69f5] rounded-3xl p-10 shadow-2xl">
+
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+
+                <div>
+                    <label class="block text-md font-bold mb-2 text-white">Your Name</label>
+                    <input type="text" name="name" placeholder="eg. Rahul Kumar"
+                        class="w-full bg-white rounded-xl px-4 py-3 focus:outline-none text-black" />
+                </div>
+
+                <div>
+                    <label class="block text-md font-bold mb-2 text-white">Email Address</label>
+                    <input type="email" name="email" placeholder="eg. rahul@gmail.com"
+                        class="w-full bg-white rounded-xl px-4 py-3 focus:outline-none text-black" />
+                </div>
+
+                <div>
+                    <label class="block text-md font-bold mb-2 text-white">Mobile No</label>
+                    <input type="number" name="contact" placeholder="eg. +91 000000000"
+                        class="w-full bg-white rounded-xl px-4 py-3 focus:outline-none text-black" />
+                </div>
+
+                <div>
+                    <label class="block text-md font-bold mb-2 text-white">Message</label>
+                    <textarea rows="5" name="message" placeholder="Tell me about your project..."
+                        class="w-full bg-white rounded-xl px-4 py-3 focus:outline-none text-black resize-none"></textarea>
+                </div>
+
+                <button type="button" onclick="sendWhatsApp()"
+                    class="w-full bg-gray-800 py-3 rounded-xl font-semibold hover:bg-black hover:shadow-xl transition">
+                    Send Message
+                </button>
+            </form>
+
+        </div>
+    </section>
+</div>
+
+
+
+<script>
+    function sendWhatsApp() {
+        const name = document.querySelector('input[name="name"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+        const contact = document.querySelector('input[name="contact"]').value;
+        const message = document.querySelector('textarea[name="message"]').value;
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        // 1️⃣ Save message to backend
+        fetch("{% url 'contact' %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": csrfToken,
+            },
+            body: new URLSearchParams({
+                name: name,
+                email: email,
+                contact: contact,
+                message: message
+            })
+        });
+
+        // 2️⃣ WhatsApp redirect
+        const phoneNumber = "917070509185"; 
+        const text =
+            `Hello 👋%0AName: ${name}%0AEmail: ${email}%0AMobile: ${contact}%0AMessage: ${message}`;
+
+        window.open(`https://wa.me/${phoneNumber}?text=${text}`, "_blank");
+    }
+</script>
+
+
+{% endblock %}

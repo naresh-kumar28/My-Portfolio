@@ -1,0 +1,13 @@
+<header class="flex bg-white justify-between items-center px-6 md:px-12 lg:px-16 py-4 md:py-6 shadow-sm sticky top-0 z-99">
+    <a href="/"
+        class="text-lg md:text-2xl font-bold text-white bg-[#bd69f5] px-3 md:px-4 py-2 rounded-xl shadow-lg hover:scale-105 transition">
+        Portfolio
+    </a>
+
+    <nav class="flex items-center gap-3 md:gap-6 text-black font-bold text-sm md:text-base">
+        <a href="{% url 'project' %}" class="{% if request.path == '/project/' %} text-[#bd69f5] {% endif %} hover:text-[#bd69f5]">Project</a>
+        <a href="{% url 'about' %}" class="{% if request.path == '/about/' %} text-[#bd69f5] {% endif %} hover:text-[#bd69f5]">About</a>
+        <a href="{% url 'team' %}" class="{% if request.path == '/team/' %} text-[#bd69f5] {% endif %} hover:text-[#bd69f5]">Team</a>
+        <a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %} text-[#bd69f5] {% endif %} hover:text-[#bd69f5]">Contact</a>
+    </nav>
+</header>
