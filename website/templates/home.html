@@ -4,56 +4,54 @@
 
 {% block content %}
 
-<div class="">
+<!-- Background -->
+<div class="h-full py-3 w-full bg-cover bg-center"
+    style="background-image: url('{% static '/images/heros-bg.png' %}');">
 
-    <!-- Background -->
-    <div class="h-full py-3 w-full bg-cover bg-center" style="background-image: url('{% static '/images/heros-bg.png' %}');">
-
-        <!-- Main Content -->
+    <!-- Main Content -->
+    <div class="flex items-center justify-center px-4 md:px-8 lg:px-16 py-8 -mt-4 md:py-0 h-[calc(100vh-80px)]">
         <div
-            class="flex items-center justify-center px-4 md:px-8 lg:px-16 py-8 -mt-4 md:py-0 h-[calc(100vh-80px)]">
-            <div
-                class="grid grid-cols-1 mt-16 mb-10 md:grid-cols-2 gap-8 md:gap-10 lg:gap-14 max-w-6xl w-full bg-gray-100 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl">
-                <!-- Left -->
-                <div class="flex flex-col justify-center">
-                    <h1
-                        class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-4 md:mb-6">
-                        Welcome to Our <span class="text-[#bd69f5]">Portfolio</span>
-                    </h1>
+            class="grid grid-cols-1 mt-16 mb-10 md:grid-cols-2 gap-8 md:gap-10 lg:gap-14 max-w-6xl w-full bg-gray-100 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl">
+            <!-- Left -->
+            <div class="flex flex-col justify-center">
+                <h1
+                    class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-4 md:mb-6">
+                    Welcome to Our <span class="text-[#bd69f5]">Portfolio</span>
+                </h1>
 
-                    <p class="text-base md:text-lg text-gray-700 mb-3 md:mb-4">
-                        We craft stunning designs and unforgettable digital experiences.
-                        Every pixel, every interaction — done with purpose.
-                    </p>
+                <p class="text-base md:text-lg text-gray-700 mb-3 md:mb-4">
+                    We craft stunning designs and unforgettable digital experiences.
+                    Every pixel, every interaction — done with purpose.
+                </p>
 
-                    <p class="text-sm md:text-base text-gray-600 mb-6 md:mb-8">
-                        From web design to branding and digital solutions, we help ideas
-                        turn into impactful products.
-                    </p>
+                <p class="text-sm md:text-base text-gray-600 mb-6 md:mb-8">
+                    From web design to branding and digital solutions, we help ideas
+                    turn into impactful products.
+                </p>
 
-                    <div class="flex items-center gap-6">
-                        <a href="{% url 'project' %}"
-                            class="w-fit bg-[#bd69f5] text-white font-bold px-6 md:px-8 lg:px-10 py-2 md:py-3 text-sm md:text-base rounded-xl shadow-lg hover:bg-[#a855d8] hover:shadow-xl hover:scale-105 transition-all">
-                            View Project
-                        </a>
+                <div class="flex items-center gap-6">
+                    <a href="{% url 'project' %}"
+                        class="w-fit bg-[#bd69f5] text-white font-bold px-6 md:px-8 lg:px-10 py-2 md:py-3 text-sm md:text-base rounded-xl shadow-lg hover:bg-[#a855d8] hover:shadow-xl hover:scale-105 transition-all">
+                        View Project
+                    </a>
 
-                        <a href="{% url 'team' %}"
-                            class="w-fit text-black font-bold px-6 md:px-8 lg:px-10 py-2 md:py-3 text-sm md:text-base rounded-xl border-2 border-black hover:text-white hover:border-[#bd69f5] hover:bg-[#bd69f5] hover:shadow-xl hover:scale-105 transition-all">
-                            View Team
-                        </a>
-                    </div>
-
+                    <a href="{% url 'team' %}"
+                        class="w-fit text-black font-bold px-6 md:px-8 lg:px-10 py-2 md:py-3 text-sm md:text-base rounded-xl border-2 border-black hover:text-white hover:border-[#bd69f5] hover:bg-[#bd69f5] hover:shadow-xl hover:scale-105 transition-all">
+                        View Team
+                    </a>
                 </div>
 
-                <!-- Right -->
-                <div class="flex items-center justify-center">
-                    <img src="{% static 'images/photo.jpg' %}" alt="Portfolio showcase"
-                        class="w-full h-48 sm:h-64 md:h-72 lg:h-96 object-cover rounded-xl md:rounded-2xl shadow-xl ring-4 ring-white" />
-                </div>
+            </div>
+
+            <!-- Right -->
+            <div class="flex items-center justify-center">
+                <img src="{% static 'images/photo.jpg' %}" alt="Portfolio showcase"
+                    class="w-full h-48 sm:h-64 md:h-72 lg:h-96 object-cover rounded-xl md:rounded-2xl shadow-xl ring-4 ring-white" />
             </div>
         </div>
     </div>
-
 </div>
+
+
 
 {% endblock %}

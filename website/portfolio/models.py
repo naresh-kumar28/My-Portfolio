@@ -31,6 +31,7 @@ class Project(models.Model):
     technology = models.CharField(max_length=200)
     project_url = models.URLField(blank=True)
     github_url = models.URLField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return self.project_name

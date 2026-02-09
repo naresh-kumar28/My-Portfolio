@@ -11,7 +11,7 @@ def home(req):
 
 def project(req):
     data = {}
-    data['projects'] = Project.objects.all()
+    data['projects'] = Project.objects.all().order_by('-created_at')
     return render(req, 'project.html', data)
 
 

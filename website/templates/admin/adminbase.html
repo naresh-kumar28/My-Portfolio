@@ -8,13 +8,13 @@
 </head>
 <body class="bg-gray-100">
 
-    <div class="flex min-h-screen">
+    <div class="flex min-h-screen md:ml-64 overflow-y-auto">
 
         <!-- Sidebar -->
         {% include 'admin/sidebar.html' %}
-
+        
         <!-- Main Content -->
-        <main class="flex-1 bg-white">
+        <main class="flex-1 bg-white ">
             {% block content %}
             
             {% endblock %}

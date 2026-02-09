@@ -1,12 +1,13 @@
-<aside class="w-64 bg-gray-800 text-white hidden md:flex flex-col">
+<aside class="hidden w-64 bg-gray-800 text-white md:flex flex-col fixed left-0 top-0 h-screen">
     <div class="p-5 text-2xl font-bold border-b border-indigo-800">
         Admin Panel
     </div>
-    <nav class="flex-1 p-4 space-y-2">
+
+    <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
         <a href="{% url 'admin' %}" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Dashboard</a>
         <a href="{% url 'project-add' %}" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Projects</a>
         <a href="{% url 'team-add' %}" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Our Team</a>
-        <a href="" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Contact</a>
+        <a href="#" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Contact</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">About</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Support</a>
     </nav>
