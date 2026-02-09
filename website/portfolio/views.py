@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Project, Member, Contact
+from .models import Project, Member, Contact, Skill
 
 
 # Create your views here.
@@ -16,7 +16,9 @@ def project(req):
 
 
 def about(req):
-    return render(req, 'about.html')
+    data = {}
+    data['skills'] = Skill.objects.all()
+    return render(req, 'about.html', data)
 
 def team(req):
     data = {}
@@ -53,7 +55,7 @@ def projectAdd(req):
         p.project_url = req.POST.get('project_url')
         p.github_url = req.POST.get('github_url')
         p.save()
-        return redirect('project')
+        return redirect('project-add')
 
     return render(req, 'admin/projectAdd.html')
 
@@ -69,6 +71,18 @@ def teamAdd(req):
         m.linkedin_url = req.POST.get('linkedin_url')
         m.github_url = req.POST.get('github_url')
         m.save()
-        return redirect('team')
+        return redirect('team-add')
 
     return render(req, 'admin/teamAdd.html')
+
+
+def addSkill(req):
+
+    if req.method=='POST':
+        s = Skill()
+        s.skill_name = req.POST.get('skill_name')
+        s.svg_code = req.POST.get('svg_code')
+        s.save()
+        return redirect('add-skill')
+
+    return render(req, 'admin/add-skills.html')

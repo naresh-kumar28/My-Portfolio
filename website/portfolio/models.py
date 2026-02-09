@@ -2,6 +2,14 @@ from django.db import models
 
 # Create your models here.
 
+class Skill(models.Model):
+    skill_name = models.CharField(max_length=100)
+    svg_code = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.skill_name
+
+
 class Contact(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()

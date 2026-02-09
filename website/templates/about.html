@@ -69,42 +69,16 @@
         <h2 class="text-4xl font-extrabold mb-10 text-[#bd69f5]">
             Skills & Tools
         </h2>
-
+        
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 font-bold text-lg">
+            {% for skill in skills %}
             <div class="bg-gray-800 rounded-2xl p-6 text-center">
-                <i class="fa-brands fa-html5"></i>
-                HTML
+                {{skill.svg_code|safe}}
+                {{skill.skill_name}}
             </div>
-            <div class="bg-gray-800 rounded-2xl p-6 text-center">
-                <i class="fa-brands fa-css3-alt"></i>
-                CSS / Tailwind
-            </div>
-            <div class="bg-gray-800 rounded-2xl p-6 text-center">
-                <i class="fa-brands fa-js"></i>
-                JavaScript
-            </div>
-            <div class="bg-gray-800 rounded-2xl p-6 text-center">
-                <i class="fa-brands fa-react"></i>
-                React
-            </div>
-            <div class="bg-gray-800 rounded-2xl p-6 text-center">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
-                UI / UX
-            </div>
-            <div class="bg-gray-800 rounded-2xl p-6 text-center">
-                <i class="fa-brands fa-python"></i>
-                Python
-            </div>
-            <div class="bg-gray-800 rounded-2xl p-6 text-center">
-                <i class="fa-brands fa-python"></i>
-                django
-            </div>
-            <div class="bg-gray-800 rounded-2xl p-6 text-center">
-                <i class="fa-brands fa-github"></i>
-                Git & GitHub
-            </div>
-
+            {% endfor %}
         </div>
+        
     </section>
 
     <!-- CTA -->

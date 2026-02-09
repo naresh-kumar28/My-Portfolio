@@ -6,11 +6,14 @@
 
 <main class="flex-1 flex flex-col overflow-hidden">
     <header class="fixed top-0 w-full bg-white shadow-sm px-8 py-6 flex justify-between items-center">
-        <h1 class="text-xl font-bold text-gray-800">Add New Team Member</h1>
+        <h1 class="text-xl font-bold text-gray-800">Our Team</h1>
     </header>
 
     <div class="flex-1 overflow-y-auto p-8 mt-20">
         <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-100">
+
+            <h1 class="text-xl font-bold text-gray-800 text-center">Add Team Member</h1>
+
             <form action="" method="post" enctype="multipart/form-data" class="space-y-6">
                 {% csrf_token %}
 

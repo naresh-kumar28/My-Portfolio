@@ -4,11 +4,12 @@
     </div>
 
     <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
-        <a href="{% url 'admin' %}" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Dashboard</a>
-        <a href="{% url 'project-add' %}" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Projects</a>
-        <a href="{% url 'team-add' %}" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Our Team</a>
+        <a href="{% url 'admin' %}" class="{% if request.path == '/admin/' %} bg-blue-600 {% else %} hover:bg-indigo-800 {% endif %} block py-2.5 px-4 rounded transition">Dashboard</a>
+        <a href="{% url 'project-add' %}" class="{% if request.path == '/admin/project-add/' %} bg-blue-600 {% else %} hover:bg-indigo-800 {% endif %} block py-2.5 px-4 rounded transition">Projects</a>
+        <a href="{% url 'team-add' %}" class="{% if request.path == '/admin/team-add/' %} bg-blue-600 {% else %} hover:bg-indigo-800 {% endif %} block py-2.5 px-4 rounded transition">Our Team</a>
+        <a href="{% url 'add-skill' %}" class="{% if request.path == '/admin/add-skill/' %} bg-blue-600 {% else %} hover:bg-indigo-800 {% endif %} block py-2.5 px-4 rounded transition">Add Skills</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Contact</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">About</a>
-        <a href="#" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Support</a>
+        
     </nav>
 </aside>
