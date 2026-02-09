@@ -1,6 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import Project, Member, Contact, Skill
 
+#login page
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -40,10 +45,12 @@ def contact(req):
     return render(req, 'contact.html')
 
 
+@login_required
 def adminDashboard(req):
     return render(req, 'admin/adminDashboard.html')
 
 
+@login_required
 def projectAdd(req):
 
     if req.method=='POST':
@@ -60,6 +67,7 @@ def projectAdd(req):
     return render(req, 'admin/projectAdd.html')
 
 
+@login_required
 def teamAdd(req):
 
     if req.method=='POST':
@@ -75,7 +83,7 @@ def teamAdd(req):
 
     return render(req, 'admin/teamAdd.html')
 
-
+@login_required
 def addSkill(req):
 
     if req.method=='POST':
@@ -86,3 +94,42 @@ def addSkill(req):
         return redirect('add-skill')
 
     return render(req, 'admin/add-skills.html')
+
+
+def loginView(req):
+
+    if req.method=='POST':
+        username = req.POST.get('username')
+        password = req.POST.get('password')
+
+        user = authenticate(req, username=username, password=password)
+
+        if user is not None:
+            login(req, user)
+            return redirect('admin')
+        
+    return render(req, 'registration/login.html')
+
+
+def registerView(req):
+
+    if req.method=='POST':
+        name = req.POST.get('name')
+        username = req.POST.get('username')
+        password = req.POST.get('password')
+
+        user = User.objects.create_user(
+            first_name=name,
+            username=username,
+            password=password,
+        )
+        user.save()
+        return redirect('login')
+
+    return render(req, 'registration/register.html')
+
+def logoutView(req):
+    logout(req)
+    return redirect('login')
+    
+    

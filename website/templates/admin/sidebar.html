@@ -10,6 +10,13 @@
         <a href="{% url 'add-skill' %}" class="{% if request.path == '/admin/add-skill/' %} bg-blue-600 {% else %} hover:bg-indigo-800 {% endif %} block py-2.5 px-4 rounded transition">Add Skills</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">Contact</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-indigo-800 transition">About</a>
+
+        {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method="post" >
+            {% csrf_token %}
+            <button type="submit" class="w-full text-left py-2.5 px-4 rounded hover:bg-indigo-800 transition">Logout</button>
+        </form>
+        {% endif %}
         
     </nav>
 </aside>

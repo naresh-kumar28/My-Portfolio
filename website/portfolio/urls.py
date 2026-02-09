@@ -16,4 +16,9 @@ urlpatterns = [
     path('admin/project-add/', projectAdd, name='project-add'),
     path('admin/team-add/', teamAdd, name='team-add'),
     path('admin/add-skill/', addSkill, name='add-skill'),
+
+    #login page work
+    path('accounts/login/', loginView, name='login'),
+    path('accounts/register/', registerView, name='register'),
+    path('accounts/logout/', logoutView, name='logout'),
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

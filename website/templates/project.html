@@ -28,16 +28,14 @@
     
                 <!-- Content -->
                 <div class="p-6">
-                    <h3 class="text-xl text-black font-bold mb-2">{{project.project_name}}</h3>
+                    <h3 class="text-xl text-black font-bold mb-2">{{project.project_name|truncatewords:3}}</h3>
                     <p class="text-gray-400 text-sm mb-4">
-                        {{project.project_about}}
+                        {{project.project_about|truncatewords:20}}
                     </p>
     
                     <!-- Tech Stack -->
                     <div class="flex flex-wrap gap-2 mb-5">
-                        <span class="text-xs bg-[#bd69f5] text-white px-3 py-1 rounded-full">{{project.technology}}</span>
-                        <!-- <span class="text-xs bg-[#bd69f5] text-white px-3 py-1 rounded-full">Tailwind</span>
-                        <span class="text-xs bg-[#bd69f5] text-white px-3 py-1 rounded-full">django</span> -->
+                        <span class="text-xs bg-[#bd69f5] text-white px-3 py-1 rounded-full">{{project.technology|truncatewords:5}}</span>
                     </div>
     
                     <!-- Buttons -->

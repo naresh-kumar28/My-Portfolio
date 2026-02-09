@@ -36,7 +36,7 @@
                     <h3 class="text-xl font-bold mt-5 text-black">{{team.member_name}}</h3>
                     <p class="text-[#bd69f5] text-sm mb-3">{{team.member_post}}</p>
                     <p class="text-gray-400 text-sm mb-4">
-                        {{team.about_member}}
+                        {{team.about_member|truncatewords:13}}
                     </p>
         
                     <!-- Socials -->
