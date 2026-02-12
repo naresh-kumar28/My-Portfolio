@@ -56,6 +56,7 @@ def projectAdd(req):
     if req.method=='POST':
         p = Project()
         p.project_image = req.FILES.get('project_image')
+        p.image_url = req.POST.get('image_url')
         p.project_name = req.POST.get('project_name')
         p.project_about = req.POST.get('project_about')
         p.technology = req.POST.get('technology')

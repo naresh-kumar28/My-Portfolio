@@ -33,12 +33,14 @@ class Member(models.Model):
 
 
 class Project(models.Model):
-    project_image = models.ImageField(upload_to='project/images/')
+    project_image = models.ImageField(upload_to='project/images/', blank=True, null=True)
+    image_url = models.URLField(max_length=500, blank=True, null=True) 
+
     project_name = models.CharField(max_length=100)
     project_about = models.TextField()
     technology = models.CharField(max_length=200)
-    project_url = models.URLField(blank=True)
-    github_url = models.URLField(blank=True)
+    project_url = models.URLField(blank=True, null=True)
+    github_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
