@@ -4,7 +4,9 @@ from .models import Project, Member, Contact, Skill
 #login page
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+staff_required = user_passes_test(lambda u: u.is_authenticated and u.is_staff, login_url='login')
 
 
 # Create your views here.
@@ -45,17 +47,21 @@ def contact(req):
     return render(req, 'contact.html')
 
 
-@login_required
+@staff_required
 def adminDashboard(req):
     return render(req, 'admin/adminDashboard.html')
 
 
-@login_required
+@staff_required
 def projectAdd(req):
 
     if req.method=='POST':
+        image = req.FILES.get('project_image')
+        if image and image.size > 5 * 1024 * 1024:  # 5MB limit
+            return render(req, 'admin/projectAdd.html', {'error': 'Image size cannot exceed 5MB.'})
+
         p = Project()
-        p.project_image = req.FILES.get('project_image')
+        p.project_image = image
         p.image_url = req.POST.get('image_url')
         p.project_name = req.POST.get('project_name')
         p.project_about = req.POST.get('project_about')
@@ -68,7 +74,7 @@ def projectAdd(req):
     return render(req, 'admin/projectAdd.html')
 
 
-@login_required
+@staff_required
 def teamAdd(req):
 
     if req.method=='POST':
@@ -84,7 +90,7 @@ def teamAdd(req):
 
     return render(req, 'admin/teamAdd.html')
 
-@login_required
+@staff_required
 def addSkill(req):
 
     if req.method=='POST':
@@ -111,23 +117,6 @@ def loginView(req):
         
     return render(req, 'registration/login.html')
 
-
-def registerView(req):
-
-    if req.method=='POST':
-        name = req.POST.get('name')
-        username = req.POST.get('username')
-        password = req.POST.get('password')
-
-        user = User.objects.create_user(
-            first_name=name,
-            username=username,
-            password=password,
-        )
-        user.save()
-        return redirect('login')
-
-    return render(req, 'registration/register.html')
 
 def logoutView(req):
     logout(req)

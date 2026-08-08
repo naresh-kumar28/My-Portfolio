@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import FileExtensionValidator
 
 # Create your models here.
 
@@ -33,7 +34,11 @@ class Member(models.Model):
 
 
 class Project(models.Model):
-    project_image = models.ImageField(upload_to='project/images/', blank=True, null=True)
+    project_image = models.ImageField(
+        upload_to='project/images/',
+        blank=True, null=True,
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])]
+    )
     image_url = models.URLField(max_length=500, blank=True, null=True) 
 
     project_name = models.CharField(max_length=100)
