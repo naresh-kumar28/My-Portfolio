@@ -2,68 +2,163 @@
 
 {% load static %}
 
-{% block title %}My Project{% endblock %}
+{% block title %}Projects | Naresh Dev{% endblock %}
 
 {% block content %}
 
-    <section class="px-10 md:px-16 py-10 max-w-7xl mx-auto text-white min-h-screen">
+<div x-data="{ modalOpen: false, currentProject: {} }" class="min-h-screen py-12 px-4 sm:px-6 lg:px-16 max-w-7xl mx-auto">
 
-        <h1 class="text-4xl text-center font-extrabold mb-20 text-[#bd69f5]">
-            My Projects
-            <p class="text-gray-800 font-bold text-xl mt-3">A Showcase of My Recent Work</p>
+    <!-- Header Section -->
+    <div class="text-center mb-14">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-[#bd69f5] tracking-tight mb-3">
+            Featured Projects
         </h1>
-    
-        <!-- Project Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for project in projects %}
-            <div class="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition">
-                <div class="">
+        <p class="text-gray-600 dark:text-gray-300 font-medium text-lg sm:text-xl max-w-2xl mx-auto">
+            A showcase of web applications, APIs, and creative digital solutions I’ve built.
+        </p>
+    </div>
+
+    <!-- Project Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for project in projects %}
+        <div class="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl dark:shadow-gray-950/50 border border-gray-100 dark:border-gray-800 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+            
+            <div>
+                <!-- Image Container -->
+                <div class="relative overflow-hidden aspect-video bg-gray-100 dark:bg-gray-800">
                     {% if project.project_image %}
-                    <img src="{{ project.project_image.url }}" alt="Project"
-                        class="h-48 w-full object-cover hover:scale-105 transition duration-500" />
+                    <img src="{{ project.project_image.url }}" alt="{{ project.project_name }}"
+                        loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     {% elif project.image_url %}
-                    <img src="{{ project.image_url }}" alt="Project"
-                        class="h-48 w-full object-cover hover:scale-105 transition duration-500" />
+                    <img src="{{ project.image_url }}" alt="{{ project.project_name }}"
+                        loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     {% else %}
-                    <div class="h-48 w-full bg-gray-200 flex items-center justify-center text-gray-400">
-                        No Image
+                    <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 dark:text-gray-600">
+                        <i class="fa-solid fa-image text-3xl mb-2"></i>
+                        <span class="text-xs font-semibold">No Preview Image</span>
                     </div>
                     {% endif %}
-                </div>
-        
-                <div class="p-6">
-                    <h3 class="text-xl text-black font-bold mb-2">{{ project.project_name|truncatewords:3 }}</h3>
-                    <p class="text-gray-400 text-sm mb-4">
-                        {{ project.project_about|truncatewords:20 }}
-                    </p>
-        
-                    <div class="flex flex-wrap gap-2 mb-5">
-                        <span class="text-xs bg-[#bd69f5] text-white px-3 py-1 rounded-full">{{project.technology|truncatewords:5}}</span>
+
+                    <!-- Quick View Overlay Button -->
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <button @click="currentProject = {
+                                    name: '{{ project.project_name|escapejs }}',
+                                    about: '{{ project.project_about|escapejs }}',
+                                    technology: '{{ project.technology|escapejs }}',
+                                    image: '{% if project.project_image %}{{ project.project_image.url }}{% else %}{{ project.image_url }}{% endif %}',
+                                    demoUrl: '{{ project.project_url|escapejs }}',
+                                    githubUrl: '{{ project.github_url|escapejs }}'
+                                }; modalOpen = true;"
+                                class="bg-white/90 dark:bg-gray-900/90 text-gray-900 dark:text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg hover:scale-105 transition">
+                            <i class="fa-solid fa-expand mr-1.5"></i> Quick View
+                        </button>
                     </div>
-        
-                    <div class="flex gap-3">
-                        <a href="{{ project.project_url }}" target="_blank"
-                            class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-semibold hover:from-[#a855f7] hover:to-pink-600 transition-all duration-300 ease-in-out">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                            </svg>
-                            Demo
-                        </a>
-                        <a href="{{ project.github_url }}" target="_blank"
-                            class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gray-800 text-white hover:bg-gray-900">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                            </svg>
-                            Code
-                        </a>
+                </div>
+
+                <!-- Content Container -->
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-[#bd69f5] transition-colors">
+                        {{ project.project_name }}
+                    </h3>
+                    
+                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3 leading-relaxed">
+                        {{ project.project_about }}
+                    </p>
+
+                    <!-- Tech Tags -->
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="text-xs font-semibold bg-[#bd69f5]/15 text-[#bd69f5] dark:bg-[#bd69f5]/25 px-3 py-1 rounded-full border border-[#bd69f5]/30">
+                            {{ project.technology }}
+                        </span>
                     </div>
                 </div>
             </div>
-            {% endfor %}
+
+            <!-- Action Buttons -->
+            <div class="p-6 pt-0 flex gap-3">
+                {% if project.project_url %}
+                <a href="{{ project.project_url }}" target="_blank" rel="noopener noreferrer"
+                    class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-semibold text-sm shadow-md hover:from-[#a855d8] hover:to-pink-600 hover:shadow-lg transition-all">
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    <span>Live Demo</span>
+                </a>
+                {% endif %}
+
+                {% if project.github_url %}
+                <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer"
+                    class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gray-900 dark:bg-gray-800 text-white font-semibold text-sm hover:bg-black dark:hover:bg-gray-700 transition-all">
+                    <i class="fa-brands fa-github text-base"></i>
+                    <span>Code</span>
+                </a>
+                {% endif %}
+            </div>
+
         </div>
+        {% empty %}
+        <div class="col-span-full py-16 text-center text-gray-500 dark:text-gray-400">
+            <i class="fa-solid fa-folder-open text-4xl mb-3 text-[#bd69f5]"></i>
+            <p class="text-lg font-semibold">No projects added yet.</p>
+        </div>
+        {% endfor %}
+    </div>
 
-    </section>
+    <!-- Quick View Modal (Alpine.js) -->
+    <div x-show="modalOpen"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         @keydown.escape.window="modalOpen = false"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm"
+         style="display: none;">
+        
+        <div @click.away="modalOpen = false" 
+             class="bg-white dark:bg-gray-900 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 relative space-y-6">
+            
+            <!-- Close Button -->
+            <button @click="modalOpen = false" 
+                    aria-label="Close Modal"
+                    class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
 
-{% endblock %}
+            <!-- Modal Image -->
+            <template x-if="currentProject.image">
+                <img :src="currentProject.image" :alt="currentProject.name" 
+                     class="w-full h-56 sm:h-72 object-cover rounded-2xl shadow-md border border-gray-100 dark:border-gray-800" />
+            </template>
+
+            <!-- Title & Tech -->
+            <div>
+                <span class="inline-block text-xs font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-3 py-1 rounded-full mb-2" x-text="currentProject.technology"></span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white" x-text="currentProject.name"></h2>
+            </div>
+
+            <!-- Description -->
+            <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed whitespace-pre-line" x-text="currentProject.about"></p>
+
+            <!-- Links -->
+            <div class="flex flex-wrap gap-4 pt-2">
+                <template x-if="currentProject.demoUrl">
+                    <a :href="currentProject.demoUrl" target="_blank" 
+                       class="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold hover:scale-105 transition shadow-lg">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Live Demo
+                    </a>
+                </template>
+                <template x-if="currentProject.githubUrl">
+                    <a :href="currentProject.githubUrl" target="_blank" 
+                       class="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gray-900 dark:bg-gray-800 text-white font-bold hover:bg-black dark:hover:bg-gray-700 transition">
+                        <i class="fa-brands fa-github"></i> GitHub Source
+                    </a>
+                </template>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -5,38 +5,36 @@
 {% block content %}
 
 <!-- Background -->
-<div class="h-full py-3 w-full bg-cover bg-center"
+<div class="h-full py-6 w-full bg-cover bg-center transition-colors duration-300"
     style="background-image: url('https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/heros-bg.png');">
 
     <!-- Main Content -->
-    <div class="flex items-center justify-center px-4 md:px-8 lg:px-16 py-8 -mt-4 md:py-0 h-[calc(100vh-80px)]">
-        <div
-            class="grid grid-cols-1 mt-16 mb-10 md:grid-cols-2 gap-8 md:gap-10 lg:gap-14 max-w-6xl w-full bg-gray-100 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl">
+    <div class="flex items-center justify-center px-4 md:px-8 lg:px-16 py-8 md:py-12 min-h-[calc(100vh-120px)]">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-14 max-w-6xl w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl transition-colors duration-300">
             <!-- Left -->
             <div class="flex flex-col justify-center">
-                <h1
-                    class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-4 md:mb-6">
+                <h1 class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4 md:mb-6">
                     Welcome to Our <span class="text-[#bd69f5]">Portfolio</span>
                 </h1>
 
-                <p class="text-base md:text-lg text-gray-700 mb-3 md:mb-4">
+                <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 mb-3 md:mb-4 leading-relaxed">
                     We craft stunning designs and unforgettable digital experiences.
                     Every pixel, every interaction — done with purpose.
                 </p>
 
-                <p class="text-sm md:text-base text-gray-600 mb-6 md:mb-8">
+                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-6 md:mb-8">
                     From web design to branding and digital solutions, we help ideas
                     turn into impactful products.
                 </p>
 
-                <div class="flex items-center gap-6">
+                <div class="flex flex-wrap items-center gap-4 sm:gap-6">
                     <a href="{% url 'project' %}"
-                        class="w-fit bg-[#bd69f5] text-white font-bold px-6 md:px-8 lg:px-10 py-2 md:py-3 text-sm md:text-base rounded-xl shadow-lg hover:bg-[#a855d8] hover:shadow-xl hover:scale-105 transition-all">
-                        View Project
+                        class="w-fit bg-[#bd69f5] text-white font-bold px-6 md:px-8 lg:px-10 py-3 text-sm md:text-base rounded-xl shadow-lg hover:bg-[#a855d8] hover:shadow-xl hover:scale-105 transition-all">
+                        View Projects
                     </a>
 
                     <a href="{% url 'team' %}"
-                        class="w-fit text-black font-bold px-6 md:px-8 lg:px-10 py-2 md:py-3 text-sm md:text-base rounded-xl border-2 border-black hover:text-white hover:border-[#bd69f5] hover:bg-[#bd69f5] hover:shadow-xl hover:scale-105 transition-all">
+                        class="w-fit text-gray-900 dark:text-white font-bold px-6 md:px-8 lg:px-10 py-3 text-sm md:text-base rounded-xl border-2 border-gray-900 dark:border-gray-100 hover:text-white hover:border-[#bd69f5] hover:bg-[#bd69f5] hover:shadow-xl hover:scale-105 transition-all">
                         View Team
                     </a>
                 </div>
@@ -46,12 +44,11 @@
             <!-- Right -->
             <div class="flex items-center justify-center">
                 <img src="https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/photo.jpg" alt="Portfolio showcase"
-                    class="w-full h-48 sm:h-64 md:h-72 lg:h-96 object-cover rounded-xl md:rounded-2xl shadow-xl ring-4 ring-white" />
+                    loading="lazy"
+                    class="w-full h-56 sm:h-64 md:h-72 lg:h-96 object-cover rounded-xl md:rounded-2xl shadow-xl ring-4 ring-white dark:ring-gray-800" />
             </div>
         </div>
     </div>
 </div>
 
-
-
-{% endblock %}
+{% endblock %}

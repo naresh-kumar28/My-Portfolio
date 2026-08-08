@@ -1,0 +1,15 @@
+<div id="contact-form-container" class="bg-gradient-to-br from-[#bd69f5] to-pink-600 rounded-3xl p-10 shadow-2xl text-white flex flex-col items-center justify-center text-center space-y-6 animate-fade-in">
+    <div class="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center shadow-lg border border-white/30">
+        <i class="fa-solid fa-check text-4xl text-white"></i>
+    </div>
+    <h2 class="text-3xl font-extrabold">Message Sent Successfully!</h2>
+    <p class="text-white/90 text-lg max-w-md">
+        Thank you for reaching out! I've received your message and will get back to you shortly.
+    </p>
+    <a href="{% url 'contact' %}" 
+       hx-get="{% url 'contact' %}" 
+       hx-target="#main-content" 
+       class="mt-4 px-6 py-3 bg-white text-gray-900 font-bold rounded-xl shadow-lg hover:bg-gray-100 hover:scale-105 transition-all">
+        Send Another Message
+    </a>
+</div>

@@ -35,16 +35,21 @@ def team(req):
 
 def contact(req):
 
-    if req.method=='POST':
+    if req.method == 'POST':
         c = Contact()
         c.name = req.POST.get('name')
         c.email = req.POST.get('email')
         c.contact = req.POST.get('contact')
         c.message = req.POST.get('message')
         c.save()
+
+        if req.headers.get('HX-Request'):
+            return render(req, 'includes/contact_success_partial.html')
+
         return redirect('contact')
 
     return render(req, 'contact.html')
+
 
 
 @staff_required

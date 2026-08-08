@@ -1,24 +1,86 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" x-data="{ darkMode: localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) }" 
+      :class="{ 'dark': darkMode }" 
+      x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Portfolio {% endblock %}</title>
+    <title>{% block title %} Naresh Dev | Portfolio {% endblock %}</title>
+
+    <!-- Tailwind CSS with Dark Mode Enabled -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fbf4ff',
+                            100: '#f5e6ff',
+                            500: '#bd69f5',
+                            600: '#a855d8',
+                            700: '#8e3abf',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- HTMX 2.0.4 -->
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+
+    <!-- Alpine.js 3.x -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* HTMX Loading Indicator Bar */
+        .htmx-indicator-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, #bd69f5, #ec4899, #3b82f6);
+            z-index: 9999;
+            transition: width 0.3s ease, opacity 0.4s ease;
+            opacity: 0;
+        }
+        .htmx-request .htmx-indicator-bar,
+        .htmx-request.htmx-indicator-bar {
+            width: 85%;
+            opacity: 1;
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white"
+      hx-boost="true"
+      hx-indicator="#top-progress-bar">
+
+    <!-- Top Loading Indicator for HTMX Boosted Navigation -->
+    <div id="top-progress-bar" class="htmx-indicator-bar"></div>
 
     {% include "includes/header.html" %}
 
-    <main>
+    <main id="main-content" class="flex-grow">
         {% block content %}
 
         {% endblock %}
@@ -28,4 +90,4 @@
 
 </body>
 
-</html>
+</html>
