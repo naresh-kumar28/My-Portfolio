@@ -1,46 +1,77 @@
-{% extends 'admin/adminbase.html' %}
+{% extends "admin/adminbase.html" %}
 
-{% block title %} Add Skill {% endblock %}
+{% block title %}Manage Skills | Admin Panel{% endblock %}
+{% block page_title %}Skills Management{% endblock %}
 
 {% block content %}
+<div class="space-y-8">
 
-<main class="flex-1 flex flex-col overflow-hidden">
-    <header class="fixed top-0 w-full bg-white shadow-sm px-8 py-6 flex justify-between items-center">
-        <h1 class="text-xl font-bold text-gray-800">Add Skill</h1>
-    </header>
+    <!-- Add Skill Form Card -->
+    <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 border border-gray-200/80 dark:border-gray-800 shadow-md">
+        <h2 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+            <i class="fa-solid fa-code text-amber-500"></i> Add New Skill / Tool
+        </h2>
 
-    <div class="flex-1 overflow-y-auto p-8 mt-20">
-        <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md border border-gray-100">
+        <form action="" method="post" class="space-y-6">
+            {% csrf_token %}
 
-            <h1 class="text-xl font-bold text-gray-800 text-center">Add New Skill </h1>
-
-            <form action="" method="post" enctype="multipart/form-data" class="space-y-6">
-                {% csrf_token %}
-
-
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Skill Name</label>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-2">Skill Name *</label>
                     <input type="text" name="skill_name" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
-                        placeholder="e.g. HTML">
+                        class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 dark:text-white transition"
+                        placeholder="e.g. Python, Docker, React">
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">SVG Code (fontawesome only)</label>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 dark:text-gray-300 mb-2">Icon HTML Code / Class *</label>
                     <input type="text" name="svg_code" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition"
-                        placeholder='e.g. <i class="fa-brands fa-html5"></i>'>
+                        class="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-amber-500 dark:text-white transition"
+                        placeholder='e.g. <i class="fa-brands fa-python text-xl"></i>'>
                 </div>
-                
-                <div class="pt-4">
-                    <button type="submit"
-                        class="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-indigo-700 shadow-lg transform active:scale-95 transition duration-150">
-                        <i class="fas fa-plus-circle mr-2"></i> Submit
-                    </button>
+            </div>
+
+            <button type="submit"
+                class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-plus-circle"></i> Save & Add Skill
+            </button>
+        </form>
+    </div>
+
+    <!-- Existing Skills Grid -->
+    <div class="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200/80 dark:border-gray-800 shadow-md p-6 sm:p-8">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Current Skills</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400">Manage or delete custom skills added to database</p>
+            </div>
+            <span class="bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-300 font-bold text-xs px-3.5 py-1.5 rounded-full border border-amber-200 dark:border-amber-800/60">
+                Total: {{ skills|length }}
+            </span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {% for s in skills %}
+            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-4 border border-gray-200/60 dark:border-gray-700/60 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3 truncate">
+                    <div class="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-500 flex items-center justify-center text-sm shrink-0">
+                        {% if s.svg_code %}{{ s.svg_code|safe }}{% else %}<i class="fa-solid fa-code"></i>{% endif %}
+                    </div>
+                    <span class="font-bold text-xs text-gray-900 dark:text-white truncate">{{ s.skill_name }}</span>
                 </div>
-            </form>
+                <a href="{% url 'skill-delete' s.id %}"
+                   onclick="return confirm('Delete skill {{ s.skill_name|escapejs }}?');"
+                   class="text-rose-500 hover:text-rose-700 p-1.5 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-950/50 transition">
+                    <i class="fa-solid fa-trash text-xs"></i>
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-span-full py-12 text-center text-gray-400 text-sm">
+                No custom skills added yet.
+            </div>
+            {% endfor %}
         </div>
     </div>
-</main>
 
-{% endblock %}
+</div>
+{% endblock %}

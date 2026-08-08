@@ -54,16 +54,24 @@ def contact(req):
 
 @staff_required
 def adminDashboard(req):
-    return render(req, 'admin/adminDashboard.html')
+    context = {
+        'project_count': Project.objects.count(),
+        'member_count': Member.objects.count(),
+        'skill_count': Skill.objects.count(),
+        'contact_count': Contact.objects.count(),
+        'recent_contacts': Contact.objects.all().order_by('-id')[:5],
+        'recent_projects': Project.objects.all().order_by('-id')[:5],
+    }
+    return render(req, 'admin/adminDashboard.html', context)
 
 
 @staff_required
 def projectAdd(req):
-
-    if req.method=='POST':
+    if req.method == 'POST':
         image = req.FILES.get('project_image')
         if image and image.size > 5 * 1024 * 1024:  # 5MB limit
-            return render(req, 'admin/projectAdd.html', {'error': 'Image size cannot exceed 5MB.'})
+            projects = Project.objects.all().order_by('-id')
+            return render(req, 'admin/projectAdd.html', {'error': 'Image size cannot exceed 5MB.', 'projects': projects})
 
         p = Project()
         p.project_image = image
@@ -76,13 +84,23 @@ def projectAdd(req):
         p.save()
         return redirect('project-add')
 
-    return render(req, 'admin/projectAdd.html')
+    projects = Project.objects.all().order_by('-id')
+    return render(req, 'admin/projectAdd.html', {'projects': projects})
+
+
+@staff_required
+def projectDelete(req, id):
+    try:
+        p = Project.objects.get(id=id)
+        p.delete()
+    except Project.DoesNotExist:
+        pass
+    return redirect('project-add')
 
 
 @staff_required
 def teamAdd(req):
-
-    if req.method=='POST':
+    if req.method == 'POST':
         m = Member()
         m.github_avatar_url = req.POST.get('github_avatar_url')
         m.member_name = req.POST.get('member_name')
@@ -93,24 +111,61 @@ def teamAdd(req):
         m.save()
         return redirect('team-add')
 
-    return render(req, 'admin/teamAdd.html')
+    teams = Member.objects.all().order_by('-id')
+    return render(req, 'admin/teamAdd.html', {'teams': teams})
+
+
+@staff_required
+def teamDelete(req, id):
+    try:
+        m = Member.objects.get(id=id)
+        m.delete()
+    except Member.DoesNotExist:
+        pass
+    return redirect('team-add')
+
 
 @staff_required
 def addSkill(req):
-
-    if req.method=='POST':
+    if req.method == 'POST':
         s = Skill()
         s.skill_name = req.POST.get('skill_name')
         s.svg_code = req.POST.get('svg_code')
         s.save()
         return redirect('add-skill')
 
-    return render(req, 'admin/add-skills.html')
+    skills = Skill.objects.all().order_by('-id')
+    return render(req, 'admin/add-skills.html', {'skills': skills})
+
+
+@staff_required
+def skillDelete(req, id):
+    try:
+        s = Skill.objects.get(id=id)
+        s.delete()
+    except Skill.DoesNotExist:
+        pass
+    return redirect('add-skill')
+
+
+@staff_required
+def adminContacts(req):
+    contacts = Contact.objects.all().order_by('-id')
+    return render(req, 'admin/contacts.html', {'contacts': contacts})
+
+
+@staff_required
+def contactDelete(req, id):
+    try:
+        c = Contact.objects.get(id=id)
+        c.delete()
+    except Contact.DoesNotExist:
+        pass
+    return redirect('admin-contacts')
 
 
 def loginView(req):
-
-    if req.method=='POST':
+    if req.method == 'POST':
         username = req.POST.get('username')
         password = req.POST.get('password')
 
@@ -119,6 +174,8 @@ def loginView(req):
         if user is not None:
             login(req, user)
             return redirect('admin')
+        else:
+            return render(req, 'registration/login.html', {'error': 'Invalid username or password'})
         
     return render(req, 'registration/login.html')
 
@@ -126,5 +183,6 @@ def loginView(req):
 def logoutView(req):
     logout(req)
     return redirect('login')
+
     
     
