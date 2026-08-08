@@ -4,9 +4,10 @@
 
 {% block content %}
 
-<!-- Background -->
-<div class="h-full py-6 w-full bg-cover bg-center transition-colors duration-300"
-    style="background-image: url('https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/heros-bg.png');">
+<!-- Background Container (Image only in Light Mode) -->
+<div class="h-full py-6 w-full bg-cover bg-center dark:bg-none transition-colors duration-300"
+    :style="!darkMode ? 'background-image: url(\'https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/heros-bg.png\');' : ''">
+
 
     <!-- Main Content -->
     <div class="flex items-center justify-center px-4 md:px-8 lg:px-16 py-8 md:py-12 min-h-[calc(100vh-120px)]">
@@ -27,17 +28,19 @@
                     turn into impactful products.
                 </p>
 
-                <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+                <div class="flex items-center gap-3 sm:gap-5 w-full max-w-md">
                     <a href="{% url 'project' %}"
-                        class="w-fit bg-[#bd69f5] text-white font-bold px-6 md:px-8 lg:px-10 py-3 text-sm md:text-base rounded-xl shadow-lg hover:bg-[#a855d8] hover:shadow-xl hover:scale-105 transition-all">
+                        class="flex-1 sm:w-44 text-center bg-[#bd69f5] text-white font-bold border-2 border-[#bd69f5] py-3 px-4 text-xs sm:text-sm md:text-base rounded-xl shadow-lg hover:bg-[#a855d8] hover:border-[#a855d8] hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap">
                         View Projects
                     </a>
 
                     <a href="{% url 'team' %}"
-                        class="w-fit text-gray-900 dark:text-white font-bold px-6 md:px-8 lg:px-10 py-3 text-sm md:text-base rounded-xl border-2 border-gray-900 dark:border-gray-100 hover:text-white hover:border-[#bd69f5] hover:bg-[#bd69f5] hover:shadow-xl hover:scale-105 transition-all">
+                        class="flex-1 sm:w-44 text-center text-gray-900 dark:text-white font-bold border-2 border-gray-900 dark:border-gray-100 py-3 px-4 text-xs sm:text-sm md:text-base rounded-xl hover:text-white hover:border-[#bd69f5] hover:bg-[#bd69f5] hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap">
                         View Team
                     </a>
                 </div>
+
+
 
             </div>
 
@@ -51,4 +54,4 @@
     </div>
 </div>
 
-{% endblock %}
+{% endblock %}
