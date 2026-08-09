@@ -2,56 +2,664 @@
 
 {% load static %}
 
+{% block title %}Naresh Dev | Portfolio{% endblock %}
+
 {% block content %}
 
-<!-- Background Container (Image only in Light Mode) -->
-<div class="h-full py-6 w-full bg-cover bg-center dark:bg-none transition-colors duration-300"
-    :style="!darkMode ? 'background-image: url(\'https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/heros-bg.png\');' : ''">
+<!-- Main Single Page Container -->
+<div x-data="{ modalOpen: false, currentProject: {} }" class="space-y-16 md:space-y-24 pb-16">
 
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="py-6 w-full bg-cover bg-center dark:bg-none transition-colors duration-300 scroll-mt-20"
+        :style="!darkMode ? 'background-image: url(\'https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/heros-bg.png\');' : ''">
 
-    <!-- Main Content -->
-    <div class="flex items-center justify-center px-4 md:px-8 lg:px-16 py-8 md:py-12 min-h-[calc(100vh-120px)]">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-14 max-w-6xl w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl transition-colors duration-300">
-            <!-- Left -->
-            <div class="flex flex-col justify-center">
-                <h1 class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4 md:mb-6">
-                    Welcome to Our <span class="text-[#bd69f5]">Portfolio</span>
-                </h1>
+        <div class="flex items-center justify-center px-4 md:px-8 lg:px-16 py-8 md:py-12 min-h-[calc(100vh-120px)]">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-14 max-w-6xl w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200/50 dark:border-gray-800/50 rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl transition-colors duration-300">
+                <!-- Left -->
+                <div class="flex flex-col justify-center">
+                    <h1 class="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight mb-4 md:mb-6">
+                        Welcome to Our <span class="text-[#bd69f5]">Portfolio</span>
+                    </h1>
 
-                <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 mb-3 md:mb-4 leading-relaxed">
-                    We craft stunning designs and unforgettable digital experiences.
-                    Every pixel, every interaction — done with purpose.
-                </p>
+                    <p class="text-base md:text-lg text-gray-700 dark:text-gray-300 mb-3 md:mb-4 leading-relaxed">
+                        We craft stunning designs and unforgettable digital experiences.
+                        Every pixel, every interaction — done with purpose.
+                    </p>
 
-                <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-6 md:mb-8">
-                    From web design to branding and digital solutions, we help ideas
-                    turn into impactful products.
-                </p>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-400 mb-6 md:mb-8">
+                        From web design to branding and digital solutions, we help ideas
+                        turn into impactful products.
+                    </p>
 
-                <div class="flex items-center gap-3 sm:gap-5 w-full max-w-md">
-                    <a href="{% url 'project' %}"
-                        class="flex-1 sm:w-44 text-center bg-[#bd69f5] text-white font-bold border-2 border-[#bd69f5] py-3 px-4 text-xs sm:text-sm md:text-base rounded-xl shadow-lg hover:bg-[#a855d8] hover:border-[#a855d8] hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap">
-                        View Projects
-                    </a>
+                    <div class="flex items-center gap-3 sm:gap-5 w-full max-w-md">
+                        <a href="#project"
+                            class="flex-1 sm:w-44 text-center bg-[#bd69f5] text-white font-bold border-2 border-[#bd69f5] py-3 px-4 text-xs sm:text-sm md:text-base rounded-xl shadow-lg hover:bg-[#a855d8] hover:border-[#a855d8] hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap">
+                            View Projects
+                        </a>
 
-                    <a href="{% url 'team' %}"
-                        class="flex-1 sm:w-44 text-center text-gray-900 dark:text-white font-bold border-2 border-gray-900 dark:border-gray-100 py-3 px-4 text-xs sm:text-sm md:text-base rounded-xl hover:text-white hover:border-[#bd69f5] hover:bg-[#bd69f5] hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap">
-                        View Team
-                    </a>
+                        <a href="#team"
+                            class="flex-1 sm:w-44 text-center text-gray-900 dark:text-white font-bold border-2 border-gray-900 dark:border-gray-100 py-3 px-4 text-xs sm:text-sm md:text-base rounded-xl hover:text-white hover:border-[#bd69f5] hover:bg-[#bd69f5] hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap">
+                            View Team
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Right -->
+                <div class="flex items-center justify-center">
+                    <img src="{% static 'images/office.png' %}" alt="Portfolio showcase"
+                        loading="lazy"
+                        class="w-full h-56 sm:h-64 md:h-72 lg:h-96 object-cover rounded-xl md:rounded-2xl shadow-xl ring-4 ring-white dark:ring-gray-800" />
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- 2. ABOUT & SKILLS SECTION -->
+    <section id="about" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-6 scroll-mt-20">
+        
+        <!-- About Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+
+            <!-- Left Content -->
+            <div class="space-y-6">
+                <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                    About <span class="text-[#bd69f5]">Me</span>
+                </h2>
+
+                <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                    I’m a passionate web developer & UI designer who loves building clean,
+                    modern interfaces that actually feel good to use. I focus on crafting
+                    experiences — not just pages.
+                </p>
+
+                <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                    My work blends design aesthetics with solid frontend engineering.
+                    Performance, accessibility, and smooth interactions are always part
+                    of the deal.
+                </p>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-4">
+
+                    <div class="bg-[#bd69f5] dark:bg-gray-900 border border-[#bd69f5]/30 dark:border-gray-800 rounded-2xl p-4 sm:p-6 text-center text-white shadow-lg">
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white dark:text-[#bd69f5]">1+</h3>
+                        <p class="font-semibold text-xs sm:text-sm text-white/90 dark:text-gray-300 mt-1">
+                            Years Experience
+                        </p>
+                    </div>
+
+                    <div class="bg-[#bd69f5] dark:bg-gray-900 border border-[#bd69f5]/30 dark:border-gray-800 rounded-2xl p-4 sm:p-6 text-center text-white shadow-lg">
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white dark:text-[#bd69f5]">25+</h3>
+                        <p class="font-semibold text-xs sm:text-sm text-white/90 dark:text-gray-300 mt-1">
+                            Projects Complete
+                        </p>
+                    </div>
+
+                    <div class="bg-[#bd69f5] dark:bg-gray-900 border border-[#bd69f5]/30 dark:border-gray-800 rounded-2xl p-4 sm:p-6 text-center text-white shadow-lg">
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white dark:text-[#bd69f5]">100%</h3>
+                        <p class="font-semibold text-xs sm:text-sm text-white/90 dark:text-gray-300 mt-1">
+                            Client Satisfaction
+                        </p>
+                    </div>
+
+                </div>
 
             </div>
 
-            <!-- Right -->
-            <div class="flex items-center justify-center">
-                <img src="{% static 'images/office.png' %}" alt="Portfolio showcase"
+            <!-- Right Image -->
+            <div class="hidden lg:flex justify-center items-center">
+                <img src="{% static 'images/office.png' %}" alt="Naresh Profile"
                     loading="lazy"
-                    class="w-full h-56 sm:h-64 md:h-72 lg:h-96 object-cover rounded-xl md:rounded-2xl shadow-xl ring-4 ring-white dark:ring-gray-800" />
+                    class="w-72 h-72 sm:w-96 sm:h-96 object-cover rounded-3xl shadow-2xl ring-4 ring-[#bd69f5]/40" />
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div>
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold text-[#bd69f5] tracking-tight">
+                        Technical Skills & Tools
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2 text-base font-medium">
+                        Technologies, frameworks, and developer tools I work with daily.
+                    </p>
+                </div>
+                <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-4 py-2 rounded-full border border-[#bd69f5]/30 w-fit">
+                    <i class="fa-solid fa-layer-group"></i> Full Stack Tech Stack
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- 1. Backend Development -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-[#bd69f5]/15 text-[#bd69f5] flex items-center justify-center text-xl group-hover:bg-[#bd69f5] group-hover:text-white transition-colors duration-300">
+                            <i class="fa-solid fa-server"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Backend</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Server & API Architecture</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-brands fa-python text-lg text-emerald-600"></i> Django
+                        </span>
+                        <span class="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-code text-lg text-emerald-600"></i> Django REST Framework
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 2. Languages -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-500 flex items-center justify-center text-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Languages</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Core Programming</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-brands fa-python text-lg text-blue-500"></i> Python
+                        </span>
+                        <span class="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-code text-lg text-slate-600"></i> C
+                        </span>
+                        <span class="flex items-center gap-2 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-brands fa-js text-lg text-amber-500"></i> JavaScript
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 3. Frontend Development -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-500/15 text-sky-500 flex items-center justify-center text-xl group-hover:bg-sky-500 group-hover:text-white transition-colors duration-300">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Frontend</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">UI & Interactive Web</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="flex items-center gap-2 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                            <i class="fa-brands fa-html5 text-base text-orange-500"></i> HTML5
+                        </span>
+                        <span class="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                            <i class="fa-brands fa-css3-alt text-base text-blue-500"></i> CSS3
+                        </span>
+                        <span class="flex items-center gap-2 bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-wind text-base text-cyan-500"></i> Tailwind CSS
+                        </span>
+                        <span class="flex items-center gap-2 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-[#bd69f5] text-base text-indigo-500"></i> HTMX
+                        </span>
+                        <span class="flex items-center gap-2 bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-mountain text-base text-teal-500"></i> Alpine.js
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 4. Databases -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center text-xl group-hover:bg-indigo-500 group-hover:text-white transition-colors duration-300">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Database</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Relational & ORM</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="flex items-center gap-2 bg-[#bd69f5]/10 text-[#bd69f5] border border-[#bd69f5]/30 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-cubes text-base"></i> Django ORM
+                        </span>
+                        <span class="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-database text-base text-blue-500"></i> MySQL
+                        </span>
+                        <span class="flex items-center gap-2 bg-sky-50 dark:bg-sky-950/40 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-database text-base text-sky-600"></i> PostgreSQL
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 5. Developer Tools & Version Control -->
+                <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group md:col-span-2 lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-rose-500/15 text-rose-500 flex items-center justify-center text-xl group-hover:bg-rose-500 group-hover:text-white transition-colors duration-300">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-bold text-gray-900 dark:text-white">Developer Tools & Version Control</h4>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Workflow, Debugging & Source Control</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="flex items-center gap-2 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-brands fa-git-alt text-lg text-orange-600"></i> Git
+                        </span>
+                        <span class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-brands fa-github text-lg"></i> GitHub
+                        </span>
+                        <span class="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-[#bd69f5] text-lg text-blue-500"></i> VS Code
+                        </span>
+                        <span class="flex items-center gap-2 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                            <i class="fa-solid fa-paper-plane text-lg text-orange-500"></i> Postman
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            {% if skills %}
+            <!-- Dynamic DB Skills fallback if any extra skills added from admin -->
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
+                <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">Additional Skills</h4>
+                <div class="flex flex-wrap gap-3">
+                    {% for skill in skills %}
+                    <span class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-3.5 py-1.5 rounded-xl text-xs font-semibold border border-gray-200 dark:border-gray-700">
+                        {% if skill.svg_code %}{{skill.svg_code|safe}}{% endif %}
+                        {{skill.skill_name}}
+                    </span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- 3. PROJECTS SECTION -->
+    <section id="project" class="px-4 sm:px-6 lg:px-16 max-w-7xl mx-auto scroll-mt-20">
+        
+        <!-- Header Section -->
+        <div class="text-center mb-14">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-[#bd69f5] tracking-tight mb-3">
+                Featured Projects
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 font-medium text-lg sm:text-xl max-w-2xl mx-auto">
+                A showcase of web applications, APIs, and creative digital solutions I’ve built.
+            </p>
+        </div>
+
+        <!-- Project Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for project in projects %}
+            <div class="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl dark:shadow-gray-950/50 border border-gray-100 dark:border-gray-800 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
+                
+                <div>
+                    <!-- Image Container -->
+                    <div class="relative overflow-hidden aspect-video bg-gray-100 dark:bg-gray-800">
+                        {% if project.project_image %}
+                        <img src="{{ project.project_image.url }}" alt="{{ project.project_name }}"
+                            loading="lazy"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        {% elif project.image_url %}
+                        <img src="{{ project.image_url }}" alt="{{ project.project_name }}"
+                            loading="lazy"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        {% else %}
+                        <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 dark:text-gray-600">
+                            <i class="fa-solid fa-image text-3xl mb-2"></i>
+                            <span class="text-xs font-semibold">No Preview Image</span>
+                        </div>
+                        {% endif %}
+
+                        <!-- Quick View Overlay Button -->
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <button @click="currentProject = {
+                                        name: '{{ project.project_name|escapejs }}',
+                                        about: '{{ project.project_about|escapejs }}',
+                                        technology: '{{ project.technology|escapejs }}',
+                                        image: '{% if project.project_image %}{{ project.project_image.url }}{% else %}{{ project.image_url }}{% endif %}',
+                                        demoUrl: '{{ project.project_url|escapejs }}',
+                                        githubUrl: '{{ project.github_url|escapejs }}'
+                                    }; modalOpen = true;"
+                                    class="bg-white/90 dark:bg-gray-900/90 text-gray-900 dark:text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg hover:scale-105 transition">
+                                <i class="fa-solid fa-expand mr-1.5"></i> Quick View
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Content Container -->
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-[#bd69f5] transition-colors">
+                            {{ project.project_name }}
+                        </h3>
+                        
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3 leading-relaxed">
+                            {{ project.project_about }}
+                        </p>
+
+                        <!-- Tech Tags -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs font-semibold bg-[#bd69f5]/15 text-[#bd69f5] dark:bg-[#bd69f5]/25 px-3 py-1 rounded-full border border-[#bd69f5]/30">
+                                {{ project.technology }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="p-6 pt-0 flex gap-3">
+                    {% if project.project_url %}
+                    <a href="{{ project.project_url }}" target="_blank" rel="noopener noreferrer"
+                        class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-semibold text-sm shadow-md hover:from-[#a855d8] hover:to-pink-600 hover:shadow-lg transition-all">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        <span>Live Demo</span>
+                    </a>
+                    {% endif %}
+
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer"
+                        class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gray-900 dark:bg-gray-800 text-white font-semibold text-sm hover:bg-black dark:hover:bg-gray-700 transition-all">
+                        <i class="fa-brands fa-github text-base"></i>
+                        <span>Code</span>
+                    </a>
+                    {% endif %}
+                </div>
+
+            </div>
+            {% empty %}
+            <div class="col-span-full py-16 text-center text-gray-500 dark:text-gray-400">
+                <i class="fa-solid fa-folder-open text-4xl mb-3 text-[#bd69f5]"></i>
+                <p class="text-lg font-semibold">No projects added yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 4. TEAM SECTION -->
+    <section id="team" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+        
+        <!-- Heading -->
+        <div class="text-center mb-10">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                Our <span class="text-[#bd69f5]">Team</span>
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 mt-2 text-lg font-medium">The passionate minds building digital experiences.</p>
+        </div>
+
+        <!-- Hero image slider section -->
+        <div class="mb-16" 
+                 x-data='{ 
+                     active: 0, 
+                     slides: [
+                         { src: "{% static "images/team.jpg" %}", alt: "Team Showcase" },
+                         { src: "{% static "images/award.jpg" %}", alt: "Award Ceremony" }
+                     ],
+                     timer: null,
+                     start() { this.timer = setInterval(() => { this.next(); }, 4000); },
+                     stop() { clearInterval(this.timer); },
+                     next() { this.active = (this.active + 1) % this.slides.length; },
+                     prev() { this.active = (this.active - 1 + this.slides.length) % this.slides.length; }
+                 }'
+                 x-init="start()"
+                 @mouseenter="stop()"
+                 @mouseleave="start()">
+
+            <div class="relative w-full h-64 sm:h-80 md:h-[450px] lg:h-[520px] overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl ring-4 ring-white dark:ring-gray-800 bg-gray-900 group">
+                
+                <!-- Slides Loop -->
+                <template x-for="(slide, index) in slides" :key="index">
+                    <div x-show="active === index" 
+                         x-transition:enter="transition ease-out duration-500"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-300"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         class="absolute inset-0 w-full h-full">
+                        <img :src="slide.src" :alt="slide.alt" 
+                             loading="lazy"
+                             class="w-full h-full object-cover object-top rounded-2xl md:rounded-3xl group-hover:scale-105 transition-transform duration-700" />
+                    </div>
+                </template>
+
+                <!-- Previous Button -->
+                <button @click="prev()" 
+                        aria-label="Previous slide"
+                        class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
+                    <i class="fa-solid fa-chevron-left text-sm sm:text-base"></i>
+                </button>
+
+                <!-- Next Button -->
+                <button @click="next()" 
+                        aria-label="Next slide"
+                        class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
+                    <i class="fa-solid fa-chevron-right text-sm sm:text-base"></i>
+                </button>
+
+                <!-- Dot Indicators Loop -->
+                <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 bg-black/40 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full">
+                    <template x-for="(slide, index) in slides" :key="index">
+                        <button @click="active = index" 
+                                :class="active === index ? 'bg-[#bd69f5] w-6' : 'bg-white/50 hover:bg-white w-2.5'" 
+                                class="h-2.5 rounded-full transition-all duration-300 focus:outline-none"
+                                :aria-label="'Slide ' + (index + 1)"></button>
+                    </template>
+                </div>
+            </div>
+
+            <!-- Caption -->
+            <p class="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base font-medium mt-4 flex items-center justify-center gap-2">
+                🏆 <span class="font-semibold text-gray-800 dark:text-gray-200">Hackathon Winner Team</span> 
+                <span class="text-gray-400 dark:text-gray-500">•</span>
+                <span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Award Ceremony</span>
+            </p>
+        </div>
+
+        <!-- Team Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+            {% for team in teams %}
+            <!-- Team Card -->
+            <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 text-center shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:-translate-y-1">
+                <img src="{{team.github_avatar_url}}" alt="{{team.member_name}}"
+                    loading="lazy"
+                    class="w-28 h-28 mx-auto rounded-full object-cover ring-4 ring-[#bd69f5]/40 shadow-md" />
+                
+                <h3 class="text-xl font-bold mt-5 text-gray-900 dark:text-white">{{team.member_name}}</h3>
+                <p class="text-[#bd69f5] font-semibold text-sm mb-3">{{team.member_post}}</p>
+                
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-6 leading-relaxed">
+                    {{team.about_member|truncatewords:18}}
+                </p>
+
+                <!-- Socials -->
+                <div class="flex gap-3 justify-center">
+                    {% if team.linkedin_url %}
+                    <a href="{{team.linkedin_url}}" target="_blank" rel="noopener noreferrer"
+                        class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white hover:from-[#a855f7] hover:to-pink-600 transition-all duration-300 ease-in-out font-semibold text-sm shadow-md">
+                        <i class="fa-brands fa-linkedin text-base"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    {% endif %}
+
+                    {% if team.github_url %}
+                    <a href="{{team.github_url}}" target="_blank" rel="noopener noreferrer"
+                        class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gray-900 dark:bg-gray-800 text-white hover:bg-black dark:hover:bg-gray-700 transition-all font-semibold text-sm">
+                        <i class="fa-brands fa-github text-base"></i>
+                        <span>GitHub</span>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-span-full py-16 text-center text-gray-500 dark:text-gray-400">
+                <i class="fa-solid fa-users text-4xl mb-3 text-[#bd69f5]"></i>
+                <p class="text-lg font-semibold">No team members added yet.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- 5. CONTACT SECTION -->
+    <section id="contact" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+            <!-- Left Info -->
+            <div class="space-y-6">
+                <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                    Let’s <span class="text-[#bd69f5]">Talk</span>
+                </h2>
+
+                <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                    Got a project, idea, or just want to say hi?
+                    Drop a message — I usually reply faster than your Wi-Fi reconnects!
+                </p>
+
+                <!-- Contact Image Box -->
+                <div class="relative w-full h-80 sm:h-96 overflow-hidden rounded-3xl shadow-2xl ring-4 ring-[#bd69f5]/30 group">
+                    <img src="https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/contact.avif" alt="Contact" 
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
+                        <div class="text-white space-y-1">
+                            <p class="font-bold text-lg"><i class="fa-solid fa-location-dot text-[#bd69f5] mr-2"></i>Available Worldwide (Remote)</p>
+                            <p class="text-sm text-gray-300"><i class="fa-solid fa-envelope text-[#bd69f5] mr-2"></i>Direct Email & WhatsApp Support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Form Container -->
+            <div id="contact-form-container" class="bg-gradient-to-br from-[#bd69f5] to-pink-600 dark:from-gray-900 dark:to-gray-800 rounded-3xl p-6 sm:p-10 shadow-2xl border border-white/20 dark:border-gray-700/50">
+
+                <form method="post" 
+                      hx-post="{% url 'contact' %}" 
+                      hx-target="#contact-form-container" 
+                      hx-swap="outerHTML"
+                      class="space-y-5">
+                    {% csrf_token %}
+
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 text-white dark:text-gray-200">Your Name</label>
+                        <input type="text" name="name" required placeholder="eg. Rahul Kumar"
+                            class="w-full bg-white/95 dark:bg-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-[#bd69f5] text-gray-900 dark:text-white transition" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 text-white dark:text-gray-200">Email Address</label>
+                        <input type="email" name="email" required placeholder="eg. rahul@gmail.com"
+                            class="w-full bg-white/95 dark:bg-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-[#bd69f5] text-gray-900 dark:text-white transition" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 text-white dark:text-gray-200">Mobile No</label>
+                        <input type="tel" name="contact" placeholder="eg. +91 9876543210"
+                            class="w-full bg-white/95 dark:bg-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-[#bd69f5] text-gray-900 dark:text-white transition" />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold mb-1.5 text-white dark:text-gray-200">Message</label>
+                        <textarea rows="4" name="message" required placeholder="Tell me about your project..."
+                            class="w-full bg-white/95 dark:bg-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-[#bd69f5] text-gray-900 dark:text-white resize-none transition"></textarea>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button type="submit"
+                            class="flex-1 flex items-center justify-center gap-2 bg-gray-900 dark:bg-[#bd69f5] text-white py-3.5 px-6 rounded-xl font-bold hover:bg-black dark:hover:bg-[#a855d8] hover:shadow-xl hover:scale-[1.02] transition-all">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send Message</span>
+                        </button>
+
+                        <button type="button" onclick="sendWhatsAppDirect()"
+                            class="flex items-center justify-center gap-2 bg-emerald-600 text-white py-3.5 px-5 rounded-xl font-bold hover:bg-emerald-700 hover:scale-[1.02] transition-all">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>WhatsApp</span>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick View Modal (Alpine.js) -->
+    <div x-show="modalOpen"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         @keydown.escape.window="modalOpen = false"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm"
+         style="display: none;">
+        
+        <div @click.away="modalOpen = false" 
+             class="bg-white dark:bg-gray-900 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 relative space-y-6">
+            
+            <!-- Close Button -->
+            <button @click="modalOpen = false" 
+                    aria-label="Close Modal"
+                    class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Image -->
+            <template x-if="currentProject.image">
+                <img :src="currentProject.image" :alt="currentProject.name" 
+                     class="w-full h-56 sm:h-72 object-cover rounded-2xl shadow-md border border-gray-100 dark:border-gray-800" />
+            </template>
+
+            <!-- Title & Tech -->
+            <div>
+                <span class="inline-block text-xs font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-3 py-1 rounded-full mb-2" x-text="currentProject.technology"></span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white" x-text="currentProject.name"></h2>
+            </div>
+
+            <!-- Description -->
+            <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed whitespace-pre-line" x-text="currentProject.about"></p>
+
+            <!-- Links -->
+            <div class="flex flex-wrap gap-4 pt-2">
+                <template x-if="currentProject.demoUrl">
+                    <a :href="currentProject.demoUrl" target="_blank" 
+                       class="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold hover:scale-105 transition shadow-lg">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Live Demo
+                    </a>
+                </template>
+                <template x-if="currentProject.githubUrl">
+                    <a :href="currentProject.githubUrl" target="_blank" 
+                       class="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gray-900 dark:bg-gray-800 text-white font-bold hover:bg-black dark:hover:bg-gray-700 transition">
+                        <i class="fa-brands fa-github"></i> GitHub Source
+                    </a>
+                </template>
             </div>
         </div>
     </div>
+
 </div>
+
+<script>
+    function sendWhatsAppDirect() {
+        const nameInput = document.querySelector('input[name="name"]');
+        const emailInput = document.querySelector('input[name="email"]');
+        const contactInput = document.querySelector('input[name="contact"]');
+        const messageInput = document.querySelector('textarea[name="message"]');
+
+        const name = nameInput ? nameInput.value : '';
+        const email = emailInput ? emailInput.value : '';
+        const contact = contactInput ? contactInput.value : '';
+        const message = messageInput ? messageInput.value : '';
+
+        if (!name || !message) {
+            alert("Please fill in your name and message first!");
+            return;
+        }
+
+        const phoneNumber = "917070509185"; 
+        const text = `Hello 👋%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMobile: ${encodeURIComponent(contact)}%0AMessage: ${encodeURIComponent(message)}`;
+        window.open(`https://wa.me/${phoneNumber}?text=${text}`, "_blank");
+    }
+</script>
 
 {% endblock %}

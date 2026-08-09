@@ -12,8 +12,12 @@ staff_required = user_passes_test(lambda u: u.is_authenticated and u.is_staff, l
 # Create your views here.
 
 def home(req):
-    
-    return render(req, 'home.html')
+    data = {
+        'projects': Project.objects.all().order_by('-created_at'),
+        'skills': Skill.objects.all(),
+        'teams': Member.objects.all(),
+    }
+    return render(req, 'home.html', data)
 
 
 def project(req):

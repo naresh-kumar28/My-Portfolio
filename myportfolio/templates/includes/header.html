@@ -13,11 +13,11 @@
         <!-- Desktop Navigation & Controls -->
         <div class="hidden md:flex items-center gap-6">
             <nav class="flex items-center gap-6 font-semibold text-sm">
-                <a href="/" class="{% if request.path == '/' %} text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 {% endif %} hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Home</a>
-                <a href="{% url 'project' %}" class="{% if request.path == '/project/' %} text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 {% endif %} hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Projects</a>
-                <a href="{% url 'about' %}" class="{% if request.path == '/about/' %} text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 {% endif %} hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">About</a>
-                <a href="{% url 'team' %}" class="{% if request.path == '/team/' %} text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 {% endif %} hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Team</a>
-                <a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %} text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 {% endif %} hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Contact</a>
+                <a href="/#home" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Home</a>
+                <a href="/#about" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">About</a>
+                <a href="/#project" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Projects</a>
+                <a href="/#team" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Team</a>
+                <a href="/#contact" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Contact</a>
             </nav>
 
             <!-- Resume Button -->
@@ -73,16 +73,16 @@
          x-transition:leave-end="opacity-0 -translate-y-4"
          @click.away="mobileMenuOpen = false"
          class="md:hidden border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg px-4 pt-2 pb-6 space-y-3">
-        <a href="/" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium {% if request.path == '/' %} bg-brand-500/10 text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 {% endif %} transition">Home</a>
-        <a href="{% url 'project' %}" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium {% if request.path == '/project/' %} bg-brand-500/10 text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 {% endif %} transition">Projects</a>
-        <a href="{% url 'about' %}" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium {% if request.path == '/about/' %} bg-brand-500/10 text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 {% endif %} transition">About</a>
-        <a href="{% url 'team' %}" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium {% if request.path == '/team/' %} bg-brand-500/10 text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 {% endif %} transition">Team</a>
-        <a href="{% url 'contact' %}" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium {% if request.path == '/contact/' %} bg-brand-500/10 text-[#bd69f5] font-bold {% else %} text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 {% endif %} transition">Contact</a>
+        <a href="/#home" @click="mobileMenuOpen = false"
+           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">Home</a>
+        <a href="/#about" @click="mobileMenuOpen = false"
+           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">About</a>
+        <a href="/#project" @click="mobileMenuOpen = false"
+           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">Projects</a>
+        <a href="/#team" @click="mobileMenuOpen = false"
+           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">Team</a>
+        <a href="/#contact" @click="mobileMenuOpen = false"
+           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">Contact</a>
         <a href="{% static 'Naresh-Kumar-Resume.pdf' %}" target="_blank" rel="noopener noreferrer" @click="mobileMenuOpen = false"
            class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-[#bd69f5] text-[#bd69f5] font-bold hover:bg-[#bd69f5] hover:text-white transition">
             <i class="fa-solid fa-file-pdf"></i>
