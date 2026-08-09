@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth" x-data="{ darkMode: localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) }" 
+<html lang="en" class="scroll-smooth dark" x-data="{ darkMode: localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : true }" 
       :class="{ 'dark': darkMode }" 
       x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))">
 
