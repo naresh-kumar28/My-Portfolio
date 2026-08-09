@@ -7,102 +7,7 @@
 {% block content %}
 
 <div x-data="{ modalOpen: false, currentProject: {} }" class="min-h-screen py-12 px-4 sm:px-6 lg:px-16 max-w-7xl mx-auto">
-
-    <!-- Header Section -->
-    <div class="text-center mb-14">
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-[#bd69f5] tracking-tight mb-3">
-            Featured Projects
-        </h1>
-        <p class="text-gray-600 dark:text-gray-300 font-medium text-lg sm:text-xl max-w-2xl mx-auto">
-            A showcase of web applications, APIs, and creative digital solutions I’ve built.
-        </p>
-    </div>
-
-    <!-- Project Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {% for project in projects %}
-        <div class="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl dark:shadow-gray-950/50 border border-gray-100 dark:border-gray-800 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1">
-            
-            <div>
-                <!-- Image Container -->
-                <div class="relative overflow-hidden aspect-video bg-gray-100 dark:bg-gray-800">
-                    {% if project.project_image %}
-                    <img src="{{ project.project_image.url }}" alt="{{ project.project_name }}"
-                        loading="lazy"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    {% elif project.image_url %}
-                    <img src="{{ project.image_url }}" alt="{{ project.project_name }}"
-                        loading="lazy"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    {% else %}
-                    <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 dark:text-gray-600">
-                        <i class="fa-solid fa-image text-3xl mb-2"></i>
-                        <span class="text-xs font-semibold">No Preview Image</span>
-                    </div>
-                    {% endif %}
-
-                    <!-- Quick View Overlay Button -->
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <button @click="currentProject = {
-                                    name: '{{ project.project_name|escapejs }}',
-                                    about: '{{ project.project_about|escapejs }}',
-                                    technology: '{{ project.technology|escapejs }}',
-                                    image: '{% if project.project_image %}{{ project.project_image.url }}{% else %}{{ project.image_url }}{% endif %}',
-                                    demoUrl: '{{ project.project_url|escapejs }}',
-                                    githubUrl: '{{ project.github_url|escapejs }}'
-                                }; modalOpen = true;"
-                                class="bg-white/90 dark:bg-gray-900/90 text-gray-900 dark:text-white px-4 py-2 rounded-xl text-sm font-bold shadow-lg hover:scale-105 transition">
-                            <i class="fa-solid fa-expand mr-1.5"></i> Quick View
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Content Container -->
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 line-clamp-1 group-hover:text-[#bd69f5] transition-colors">
-                        {{ project.project_name }}
-                    </h3>
-                    
-                    <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3 leading-relaxed">
-                        {{ project.project_about }}
-                    </p>
-
-                    <!-- Tech Tags -->
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="text-xs font-semibold bg-[#bd69f5]/15 text-[#bd69f5] dark:bg-[#bd69f5]/25 px-3 py-1 rounded-full border border-[#bd69f5]/30">
-                            {{ project.technology }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="p-6 pt-0 flex gap-3">
-                {% if project.project_url %}
-                <a href="{{ project.project_url }}" target="_blank" rel="noopener noreferrer"
-                    class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-semibold text-sm shadow-md hover:from-[#a855d8] hover:to-pink-600 hover:shadow-lg transition-all">
-                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                    <span>Live Demo</span>
-                </a>
-                {% endif %}
-
-                {% if project.github_url %}
-                <a href="{{ project.github_url }}" target="_blank" rel="noopener noreferrer"
-                    class="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gray-900 dark:bg-gray-800 text-white font-semibold text-sm hover:bg-black dark:hover:bg-gray-700 transition-all">
-                    <i class="fa-brands fa-github text-base"></i>
-                    <span>Code</span>
-                </a>
-                {% endif %}
-            </div>
-
-        </div>
-        {% empty %}
-        <div class="col-span-full py-16 text-center text-gray-500 dark:text-gray-400">
-            <i class="fa-solid fa-folder-open text-4xl mb-3 text-[#bd69f5]"></i>
-            <p class="text-lg font-semibold">No projects added yet.</p>
-        </div>
-        {% endfor %}
-    </div>
+    {% include "includes/_projects_section.html" %}
 
     <!-- Quick View Modal (Alpine.js) -->
     <div x-show="modalOpen"
@@ -158,7 +63,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
-{% endblock %}
+{% endblock %}

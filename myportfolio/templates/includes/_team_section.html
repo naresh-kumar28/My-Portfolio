@@ -1,0 +1,121 @@
+{% load static %}
+
+<!-- Heading -->
+<div class="text-center mb-10">
+    <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+        Our <span class="text-[#bd69f5]">Team</span>
+    </h2>
+    <p class="text-gray-600 dark:text-gray-400 mt-2 text-lg font-medium">The passionate minds building digital experiences.</p>
+</div>
+
+<!-- Hero image slider section -->
+<div class="mb-16" 
+         x-data='{ 
+             active: 0, 
+             slides: [
+                 { src: "{% static "images/team.jpg" %}", alt: "Team Showcase" },
+                 { src: "{% static "images/award.jpg" %}", alt: "Award Ceremony" }
+             ],
+             timer: null,
+             start() { this.timer = setInterval(() => { this.next(); }, 4000); },
+             stop() { clearInterval(this.timer); },
+             next() { this.active = (this.active + 1) % this.slides.length; },
+             prev() { this.active = (this.active - 1 + this.slides.length) % this.slides.length; }
+         }'
+         x-init="start()"
+         @mouseenter="stop()"
+         @mouseleave="start()">
+
+    <div class="relative w-full h-64 sm:h-80 md:h-[450px] lg:h-[520px] overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl ring-4 ring-white dark:ring-gray-800 bg-gray-900 group">
+        
+        <!-- Slides Loop -->
+        <template x-for="(slide, index) in slides" :key="index">
+            <div x-show="active === index" 
+                 x-transition:enter="transition ease-out duration-500"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-300"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="absolute inset-0 w-full h-full">
+                <img :src="slide.src" :alt="slide.alt" 
+                     loading="lazy"
+                     class="w-full h-full object-cover object-top rounded-2xl md:rounded-3xl group-hover:scale-105 transition-transform duration-700" />
+            </div>
+        </template>
+
+        <!-- Previous Button -->
+        <button @click="prev()" 
+                aria-label="Previous slide"
+                class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
+            <i class="fa-solid fa-chevron-left text-sm sm:text-base"></i>
+        </button>
+
+        <!-- Next Button -->
+        <button @click="next()" 
+                aria-label="Next slide"
+                class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
+            <i class="fa-solid fa-chevron-right text-sm sm:text-base"></i>
+        </button>
+
+        <!-- Dot Indicators Loop -->
+        <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 bg-black/40 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full">
+            <template x-for="(slide, index) in slides" :key="index">
+                <button @click="active = index" 
+                        :class="active === index ? 'bg-[#bd69f5] w-6' : 'bg-white/50 hover:bg-white w-2.5'" 
+                        class="h-2.5 rounded-full transition-all duration-300 focus:outline-none"
+                        :aria-label="'Slide ' + (index + 1)"></button>
+            </template>
+        </div>
+    </div>
+
+    <!-- Caption -->
+    <p class="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base font-medium mt-4 flex items-center justify-center gap-2">
+        🏆 <span class="font-semibold text-gray-800 dark:text-gray-200">Hackathon Winner Team</span> 
+        <span class="text-gray-400 dark:text-gray-500">•</span>
+        <span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Award Ceremony</span>
+    </p>
+</div>
+
+<!-- Team Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
+    {% for team in teams %}
+    <!-- Team Card -->
+    <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 text-center shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 border border-gray-100 dark:border-gray-800 transition-all duration-300 hover:-translate-y-1">
+        <img src="{{team.github_avatar_url}}" alt="{{team.member_name}}"
+            loading="lazy"
+            class="w-28 h-28 mx-auto rounded-full object-cover ring-4 ring-[#bd69f5]/40 shadow-md" />
+        
+        <h3 class="text-xl font-bold mt-5 text-gray-900 dark:text-white">{{team.member_name}}</h3>
+        <p class="text-[#bd69f5] font-semibold text-sm mb-3">{{team.member_post}}</p>
+        
+        <p class="text-gray-600 dark:text-gray-300 text-sm mb-6 leading-relaxed">
+            {{team.about_member|truncatewords:18}}
+        </p>
+
+        <!-- Socials -->
+        <div class="flex gap-3 justify-center">
+            {% if team.linkedin_url %}
+            <a href="{{team.linkedin_url}}" target="_blank" rel="noopener noreferrer"
+                class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white hover:from-[#a855f7] hover:to-pink-600 transition-all duration-300 ease-in-out font-semibold text-sm shadow-md">
+                <i class="fa-brands fa-linkedin text-base"></i>
+                <span>LinkedIn</span>
+            </a>
+            {% endif %}
+
+            {% if team.github_url %}
+            <a href="{{team.github_url}}" target="_blank" rel="noopener noreferrer"
+                class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gray-900 dark:bg-gray-800 text-white hover:bg-black dark:hover:bg-gray-700 transition-all font-semibold text-sm">
+                <i class="fa-brands fa-github text-base"></i>
+                <span>GitHub</span>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-span-full py-16 text-center text-gray-500 dark:text-gray-400">
+        <i class="fa-solid fa-users text-4xl mb-3 text-[#bd69f5]"></i>
+        <p class="text-lg font-semibold">No team members added yet.</p>
+    </div>
+    {% endfor %}
+</div>

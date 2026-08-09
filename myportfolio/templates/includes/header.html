@@ -1,10 +1,39 @@
 {% load static %}
 
-<header x-data="{ mobileMenuOpen: false }"
+<header x-data="{ 
+            mobileMenuOpen: false,
+            activeSection: 'home',
+            scrollTo(id) {
+                this.mobileMenuOpen = false;
+                if (window.location.pathname === '/' || window.location.pathname === '') {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.scrollIntoView({ behavior: 'smooth' });
+                        history.pushState(null, null, '#' + id);
+                        this.activeSection = id;
+                        return;
+                    }
+                }
+                window.location.href = '/#' + id;
+            }
+        }"
+        x-init="
+            if (window.location.pathname === '/' || window.location.pathname === '') {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            activeSection = entry.target.id;
+                        }
+                    });
+                }, { threshold: 0.2 });
+                document.querySelectorAll('section[id]').forEach(section => observer.observe(section));
+            }
+        "
+        hx-boost="false"
         class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-gray-900/80 border-b border-gray-200/60 dark:border-gray-800/60 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center">
         <!-- Logo -->
-        <a href="/"
+        <a href="#home"
             class="group flex items-center gap-2 text-lg md:text-xl font-extrabold text-white bg-gradient-to-r from-[#bd69f5] to-pink-500 px-4 py-2 rounded-xl shadow-md hover:shadow-brand-500/20 hover:scale-[1.02] transition-all">
             <i class="fa-solid fa-code text-sm"></i>
             <span>naresh.dev</span>
@@ -13,11 +42,21 @@
         <!-- Desktop Navigation & Controls -->
         <div class="hidden md:flex items-center gap-6">
             <nav class="flex items-center gap-6 font-semibold text-sm">
-                <a href="/#home" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Home</a>
-                <a href="/#about" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">About</a>
-                <a href="/#project" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Projects</a>
-                <a href="/#team" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Team</a>
-                <a href="/#contact" class="text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5] transition-colors">Contact</a>
+                <a href="/#home" @click.prevent="scrollTo('home')" 
+                   :class="activeSection === 'home' ? 'text-[#bd69f5] dark:text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5]'" 
+                   class="transition-colors">Home</a>
+                <a href="/#about" @click.prevent="scrollTo('about')" 
+                   :class="activeSection === 'about' ? 'text-[#bd69f5] dark:text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5]'" 
+                   class="transition-colors">About</a>
+                <a href="/#project" @click.prevent="scrollTo('project')" 
+                   :class="activeSection === 'project' ? 'text-[#bd69f5] dark:text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5]'" 
+                   class="transition-colors">Projects</a>
+                <a href="/#team" @click.prevent="scrollTo('team')" 
+                   :class="activeSection === 'team' ? 'text-[#bd69f5] dark:text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5]'" 
+                   class="transition-colors">Team</a>
+                <a href="/#contact" @click.prevent="scrollTo('contact')" 
+                   :class="activeSection === 'contact' ? 'text-[#bd69f5] dark:text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:text-[#bd69f5] dark:hover:text-[#bd69f5]'" 
+                   class="transition-colors">Contact</a>
             </nav>
 
             <!-- Resume Button -->
@@ -73,16 +112,21 @@
          x-transition:leave-end="opacity-0 -translate-y-4"
          @click.away="mobileMenuOpen = false"
          class="md:hidden border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg px-4 pt-2 pb-6 space-y-3">
-        <a href="/#home" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">Home</a>
-        <a href="/#about" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">About</a>
-        <a href="/#project" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">Projects</a>
-        <a href="/#team" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">Team</a>
-        <a href="/#contact" @click="mobileMenuOpen = false"
-           class="block py-2.5 px-4 rounded-xl font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5] transition">Contact</a>
+        <a href="/#home" @click.prevent="scrollTo('home')"
+           :class="activeSection === 'home' ? 'bg-[#bd69f5]/15 text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5]'"
+           class="block py-2.5 px-4 rounded-xl font-medium transition">Home</a>
+        <a href="/#about" @click.prevent="scrollTo('about')"
+           :class="activeSection === 'about' ? 'bg-[#bd69f5]/15 text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5]'"
+           class="block py-2.5 px-4 rounded-xl font-medium transition">About</a>
+        <a href="/#project" @click.prevent="scrollTo('project')"
+           :class="activeSection === 'project' ? 'bg-[#bd69f5]/15 text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5]'"
+           class="block py-2.5 px-4 rounded-xl font-medium transition">Projects</a>
+        <a href="/#team" @click.prevent="scrollTo('team')"
+           :class="activeSection === 'team' ? 'bg-[#bd69f5]/15 text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5]'"
+           class="block py-2.5 px-4 rounded-xl font-medium transition">Team</a>
+        <a href="/#contact" @click.prevent="scrollTo('contact')"
+           :class="activeSection === 'contact' ? 'bg-[#bd69f5]/15 text-[#bd69f5] font-bold' : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-[#bd69f5]'"
+           class="block py-2.5 px-4 rounded-xl font-medium transition">Contact</a>
         <a href="{% static 'Naresh-Kumar-Resume.pdf' %}" target="_blank" rel="noopener noreferrer" @click="mobileMenuOpen = false"
            class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-[#bd69f5] text-[#bd69f5] font-bold hover:bg-[#bd69f5] hover:text-white transition">
             <i class="fa-solid fa-file-pdf"></i>
@@ -90,4 +134,3 @@
         </a>
     </div>
 </header>
-

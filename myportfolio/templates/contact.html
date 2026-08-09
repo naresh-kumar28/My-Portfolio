@@ -6,94 +6,21 @@
 
 {% block content %}
 
-<div class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-
-    <!-- Contact Section -->
-    <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-
-        <!-- Left Info -->
-        <div class="space-y-6">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-                Let’s <span class="text-[#bd69f5]">Talk</span>
-            </h1>
-
-            <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-                Got a project, idea, or just want to say hi?
-                Drop a message — I usually reply faster than your Wi-Fi reconnects!
-            </p>
-
-            <!-- Contact Image Box -->
-            <div class="relative w-full h-80 sm:h-96 overflow-hidden rounded-3xl shadow-2xl ring-4 ring-[#bd69f5]/30 group">
-                <img src="https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/contact.avif" alt="Contact" 
-                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
-                    <div class="text-white space-y-1">
-                        <p class="font-bold text-lg"><i class="fa-solid fa-location-dot text-[#bd69f5] mr-2"></i>Available Worldwide (Remote)</p>
-                        <p class="text-sm text-gray-300"><i class="fa-solid fa-envelope text-[#bd69f5] mr-2"></i>Direct Email & WhatsApp Support</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Form Container -->
-        <div id="contact-form-container" class="bg-gradient-to-br from-[#bd69f5] to-pink-600 dark:from-gray-900 dark:to-gray-800 rounded-3xl p-6 sm:p-10 shadow-2xl border border-white/20 dark:border-gray-700/50">
-
-            <form method="post" 
-                  hx-post="{% url 'contact' %}" 
-                  hx-target="#contact-form-container" 
-                  hx-swap="outerHTML"
-                  class="space-y-5">
-                {% csrf_token %}
-
-                <div>
-                    <label class="block text-sm font-bold mb-1.5 text-white dark:text-gray-200">Your Name</label>
-                    <input type="text" name="name" required placeholder="eg. Rahul Kumar"
-                        class="w-full bg-white/95 dark:bg-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-[#bd69f5] text-gray-900 dark:text-white transition" />
-                </div>
-
-                <div>
-                    <label class="block text-sm font-bold mb-1.5 text-white dark:text-gray-200">Email Address</label>
-                    <input type="email" name="email" required placeholder="eg. rahul@gmail.com"
-                        class="w-full bg-white/95 dark:bg-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-[#bd69f5] text-gray-900 dark:text-white transition" />
-                </div>
-
-                <div>
-                    <label class="block text-sm font-bold mb-1.5 text-white dark:text-gray-200">Mobile No</label>
-                    <input type="tel" name="contact" placeholder="eg. +91 9876543210"
-                        class="w-full bg-white/95 dark:bg-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-[#bd69f5] text-gray-900 dark:text-white transition" />
-                </div>
-
-                <div>
-                    <label class="block text-sm font-bold mb-1.5 text-white dark:text-gray-200">Message</label>
-                    <textarea rows="4" name="message" required placeholder="Tell me about your project..."
-                        class="w-full bg-white/95 dark:bg-gray-800 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-white dark:focus:ring-[#bd69f5] text-gray-900 dark:text-white resize-none transition"></textarea>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                    <button type="submit"
-                        class="flex-1 flex items-center justify-center gap-2 bg-gray-900 dark:bg-[#bd69f5] text-white py-3.5 px-6 rounded-xl font-bold hover:bg-black dark:hover:bg-[#a855d8] hover:shadow-xl hover:scale-[1.02] transition-all">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span>Send Message</span>
-                    </button>
-
-                    <button type="button" onclick="sendWhatsAppDirect()"
-                        class="flex items-center justify-center gap-2 bg-emerald-600 text-white py-3.5 px-5 rounded-xl font-bold hover:bg-emerald-700 hover:scale-[1.02] transition-all">
-                        <i class="fa-brands fa-whatsapp text-lg"></i>
-                        <span>WhatsApp</span>
-                    </button>
-                </div>
-            </form>
-
-        </div>
-    </section>
+<div class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen">
+    {% include "includes/_contact_section.html" %}
 </div>
 
 <script>
     function sendWhatsAppDirect() {
-        const name = document.querySelector('input[name="name"]').value;
-        const email = document.querySelector('input[name="email"]').value;
-        const contact = document.querySelector('input[name="contact"]').value;
-        const message = document.querySelector('textarea[name="message"]').value;
+        const nameInput = document.querySelector('input[name="name"]');
+        const emailInput = document.querySelector('input[name="email"]');
+        const contactInput = document.querySelector('input[name="contact"]');
+        const messageInput = document.querySelector('textarea[name="message"]');
+
+        const name = nameInput ? nameInput.value : '';
+        const email = emailInput ? emailInput.value : '';
+        const contact = contactInput ? contactInput.value : '';
+        const message = messageInput ? messageInput.value : '';
 
         if (!name || !message) {
             alert("Please fill in your name and message first!");
@@ -106,4 +33,4 @@
     }
 </script>
 
-{% endblock %}
+{% endblock %}

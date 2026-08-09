@@ -1,0 +1,216 @@
+{% load static %}
+
+<!-- About Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+
+    <!-- Left Content -->
+    <div class="space-y-6">
+        <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+            About <span class="text-[#bd69f5]">Me</span>
+        </h2>
+
+        <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+            Full-Stack Python Developer specializing in Django, DRF, and REST API development. Experienced in OAuth 2.0, RBAC, Razorpay payment integration, MySQL/PostgreSQL, and HTMX/Alpine.js for building scalable e-commerce platforms.
+        </p>
+
+        <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+            I focus on building secure, production-ready backend systems — from custom admin panels to payment gateway integrations — while keeping the code clean, modular, and easy to maintain.
+        </p>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-4">
+
+            <div class="bg-[#bd69f5] dark:bg-gray-900 border border-[#bd69f5]/30 dark:border-gray-800 rounded-2xl p-4 sm:p-6 text-center text-white shadow-lg">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white dark:text-[#bd69f5]">3+</h3>
+                <p class="font-semibold text-xs sm:text-sm text-white/90 dark:text-gray-300 mt-1">
+                    Major Projects
+                </p>
+            </div>
+
+            <div class="bg-[#bd69f5] dark:bg-gray-900 border border-[#bd69f5]/30 dark:border-gray-800 rounded-2xl p-4 sm:p-6 text-center text-white shadow-lg">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white dark:text-[#bd69f5]">200+</h3>
+                <p class="font-semibold text-xs sm:text-sm text-white/90 dark:text-gray-300 mt-1">
+                    REST API Endpoints Built
+                </p>
+            </div>
+
+            <div class="bg-[#bd69f5] dark:bg-gray-900 border border-[#bd69f5]/30 dark:border-gray-800 rounded-2xl p-4 sm:p-6 text-center text-white shadow-lg">
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white dark:text-[#bd69f5]">18+</h3>
+                <p class="font-semibold text-xs sm:text-sm text-white/90 dark:text-gray-300 mt-1">
+                    Database Models Designed
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Right Image -->
+    <div class="hidden lg:flex justify-center items-center">
+        <img src="{% static 'images/office.png' %}" alt="Naresh Profile"
+            loading="lazy"
+            class="w-72 h-72 sm:w-96 sm:h-96 object-cover rounded-3xl shadow-2xl ring-4 ring-[#bd69f5]/40" />
+    </div>
+</div>
+
+<!-- Skills Section -->
+<div>
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <div>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-[#bd69f5] tracking-tight">
+                Technical Skills & Tools
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 mt-2 text-base font-medium">
+                Technologies, frameworks, and developer tools I work with daily.
+            </p>
+        </div>
+        <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-4 py-2 rounded-full border border-[#bd69f5]/30 w-fit">
+            <i class="fa-solid fa-layer-group"></i> Full Stack Tech Stack
+        </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- 1. Backend Development -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-[#bd69f5]/15 text-[#bd69f5] flex items-center justify-center text-xl group-hover:bg-[#bd69f5] group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-server"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Backend</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Server & API Architecture</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+                <span class="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-brands fa-python text-lg text-emerald-600"></i> Django
+                </span>
+                <span class="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-code text-lg text-emerald-600"></i> Django REST Framework
+                </span>
+            </div>
+        </div>
+
+        <!-- 2. Languages -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-500 flex items-center justify-center text-xl group-hover:bg-amber-500 group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Languages</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Core Programming</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+                <span class="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-brands fa-python text-lg text-blue-500"></i> Python
+                </span>
+                <span class="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-code text-lg text-slate-600"></i> C
+                </span>
+                <span class="flex items-center gap-2 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-brands fa-js text-lg text-amber-500"></i> JavaScript
+                </span>
+            </div>
+        </div>
+
+        <!-- 3. Frontend Development -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-sky-500/15 text-sky-500 flex items-center justify-center text-xl group-hover:bg-sky-500 group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Frontend</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">UI & Interactive Web</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+                <span class="flex items-center gap-2 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                    <i class="fa-brands fa-html5 text-base text-orange-500"></i> HTML5
+                </span>
+                <span class="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                    <i class="fa-brands fa-css3-alt text-base text-blue-500"></i> CSS3
+                </span>
+                <span class="flex items-center gap-2 bg-cyan-50 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-wind text-base text-cyan-500"></i> Tailwind CSS
+                </span>
+                <span class="flex items-center gap-2 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-[#bd69f5] text-base text-indigo-500"></i> HTMX
+                </span>
+                <span class="flex items-center gap-2 bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800/60 px-3 py-1.5 rounded-xl text-xs font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-mountain text-base text-teal-500"></i> Alpine.js
+                </span>
+            </div>
+        </div>
+
+        <!-- 4. Databases -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center text-xl group-hover:bg-indigo-500 group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-database"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Database</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Relational & ORM</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+                <span class="flex items-center gap-2 bg-[#bd69f5]/10 text-[#bd69f5] border border-[#bd69f5]/30 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-cubes text-base"></i> Django ORM
+                </span>
+                <span class="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-database text-base text-blue-500"></i> MySQL
+                </span>
+                <span class="flex items-center gap-2 bg-sky-50 dark:bg-sky-950/40 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-database text-base text-sky-600"></i> PostgreSQL
+                </span>
+            </div>
+        </div>
+
+        <!-- 5. Developer Tools & Version Control -->
+        <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-7 border border-gray-200/80 dark:border-gray-800 shadow-lg hover:shadow-2xl dark:shadow-gray-950/60 transition-all duration-300 hover:-translate-y-1 group md:col-span-2 lg:col-span-2">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-12 h-12 rounded-2xl bg-rose-500/15 text-rose-500 flex items-center justify-center text-xl group-hover:bg-rose-500 group-hover:text-white transition-colors duration-300">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white">Developer Tools & Version Control</h4>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 font-medium">Workflow, Debugging & Source Control</p>
+                </div>
+            </div>
+            <div class="flex flex-wrap gap-2.5">
+                <span class="flex items-center gap-2 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-brands fa-git-alt text-lg text-orange-600"></i> Git
+                </span>
+                <span class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-700 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-brands fa-github text-lg"></i> GitHub
+                </span>
+                <span class="flex items-center gap-2 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-[#bd69f5] text-lg text-blue-500"></i> VS Code
+                </span>
+                <span class="flex items-center gap-2 bg-orange-50 dark:bg-orange-950/40 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-800/60 px-3.5 py-2 rounded-xl text-sm font-semibold hover:scale-105 transition">
+                    <i class="fa-solid fa-paper-plane text-lg text-orange-500"></i> Postman
+                </span>
+            </div>
+        </div>
+
+    </div>
+
+    {% if skills %}
+    <!-- Dynamic DB Skills fallback if any extra skills added from admin -->
+    <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-800">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">Additional Skills</h4>
+        <div class="flex flex-wrap gap-3">
+            {% for skill in skills %}
+            <span class="flex items-center gap-2 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-3.5 py-1.5 rounded-xl text-xs font-semibold border border-gray-200 dark:border-gray-700">
+                {% if skill.svg_code %}{{skill.svg_code|safe}}{% endif %}
+                {{skill.skill_name}}
+            </span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
