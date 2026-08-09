@@ -16,14 +16,87 @@
         <p class="text-gray-600 dark:text-gray-400 mt-2 text-lg font-medium">The passionate minds building digital experiences.</p>
     </div>
 
-    <!-- Hero image section -->
-    <section class="mb-16">
-        <div class="w-full h-56 sm:h-72 md:h-96 lg:h-[500px] overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl ring-4 ring-white dark:ring-gray-800">
-            <img src="https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/team.jpg" alt="Team Showcase" 
-                 loading="lazy"
-                 class="w-full h-full object-cover rounded-2xl md:rounded-3xl hover:scale-105 transition-transform duration-500" />
+    <!-- Hero image slider section -->
+    <section class="mb-16" 
+             x-data="{ 
+                 active: 0, 
+                 total: 2,
+                 timer: null,
+                 start() { this.timer = setInterval(() => { this.next(); }, 4000); },
+                 stop() { clearInterval(this.timer); },
+                 next() { this.active = (this.active + 1) % this.total; },
+                 prev() { this.active = (this.active - 1 + this.total) % this.total; }
+             }"
+             x-init="start()"
+             @mouseenter="stop()"
+             @mouseleave="start()">
+        
+        <div class="relative w-full h-64 sm:h-80 md:h-[450px] lg:h-[520px] overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl ring-4 ring-white dark:ring-gray-800 bg-gray-900 group">
+            
+            <!-- Slide 1: Team Photo -->
+            <div x-show="active === 0" 
+                 x-transition:enter="transition ease-out duration-500"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-300"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="absolute inset-0 w-full h-full">
+                <img src="{% static 'images/team.jpg' %}" alt="Team Showcase" 
+                     loading="lazy"
+                     class="w-full h-full object-cover object-top rounded-2xl md:rounded-3xl group-hover:scale-105 transition-transform duration-700" />
+            </div>
+
+            <!-- Slide 2: Award Ceremony -->
+            <div x-show="active === 1" 
+                 x-transition:enter="transition ease-out duration-500"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100"
+                 x-transition:leave="transition ease-in duration-300"
+                 x-transition:leave-start="opacity-100 scale-100"
+                 x-transition:leave-end="opacity-0 scale-95"
+                 class="absolute inset-0 w-full h-full">
+                <img src="{% static 'images/award.jpg' %}" alt="Award Ceremony" 
+                     loading="lazy"
+                     class="w-full h-full object-cover object-top rounded-2xl md:rounded-3xl group-hover:scale-105 transition-transform duration-700" />
+            </div>
+
+            <!-- Previous Button -->
+            <button @click="prev()" 
+                    aria-label="Previous slide"
+                    class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
+                <i class="fa-solid fa-chevron-left text-sm sm:text-base"></i>
+            </button>
+
+            <!-- Next Button -->
+            <button @click="next()" 
+                    aria-label="Next slide"
+                    class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
+                <i class="fa-solid fa-chevron-right text-sm sm:text-base"></i>
+            </button>
+
+            <!-- Dot Indicators -->
+            <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 bg-black/40 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full">
+                <button @click="active = 0" 
+                        :class="active === 0 ? 'bg-[#bd69f5] w-6' : 'bg-white/50 hover:bg-white w-2.5'" 
+                        class="h-2.5 rounded-full transition-all duration-300 focus:outline-none"
+                        aria-label="Slide 1"></button>
+                <button @click="active = 1" 
+                        :class="active === 1 ? 'bg-[#bd69f5] w-6' : 'bg-white/50 hover:bg-white w-2.5'" 
+                        class="h-2.5 rounded-full transition-all duration-300 focus:outline-none"
+                        aria-label="Slide 2"></button>
+            </div>
         </div>
+
+        <!-- Caption -->
+        <p class="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base font-medium mt-4 flex items-center justify-center gap-2">
+            🏆 <span class="font-semibold text-gray-800 dark:text-gray-200">Hackathon Winner Team</span> 
+            <span class="text-gray-400 dark:text-gray-500">•</span>
+            <span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Award Ceremony</span>
+        </p>
     </section>
+
+
 
     <!-- Team Section -->
     <section class="pb-12">
@@ -73,4 +146,4 @@
 
 </div>
 
-{% endblock %}
+{% endblock %}
