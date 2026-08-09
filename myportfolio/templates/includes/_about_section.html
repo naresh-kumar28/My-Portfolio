@@ -1,60 +1,62 @@
 {% load static %}
 
-<!-- About Section -->
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+<!-- About Section Card Container -->
+<div class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200/60 dark:border-gray-800/60 rounded-2xl md:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-xl transition-colors duration-300 mb-12 md:mb-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-    <!-- Left Content -->
-    <div class="space-y-6">
-        <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-            About <span class="text-[#bd69f5]">Me</span>
-        </h2>
+        <!-- Left Content -->
+        <div class="space-y-6">
+            <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                About <span class="text-[#bd69f5]">Me</span>
+            </h2>
 
-        <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-            Full-Stack Python Developer specializing in Django, DRF, and REST API development. Experienced in OAuth 2.0, RBAC, Razorpay payment integration, MySQL/PostgreSQL, and HTMX/Alpine.js for building scalable e-commerce platforms.
-        </p>
+            <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                Full-Stack Python Developer specializing in Django, DRF, and REST API development. Experienced in OAuth 2.0, RBAC, Razorpay payment integration, MySQL/PostgreSQL, and HTMX/Alpine.js for building scalable e-commerce platforms.
+            </p>
 
-        <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-            I focus on building secure, production-ready backend systems — from custom admin panels to payment gateway integrations — while keeping the code clean, modular, and easy to maintain.
-        </p>
+            <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+                I focus on building secure, production-ready backend systems — from custom admin panels to payment gateway integrations — while keeping the code clean, modular, and easy to maintain.
+            </p>
 
-        <!-- Stats -->
-        <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-4">
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-4">
 
-            <div class="bg-[#bd69f5] dark:bg-gray-900 border border-[#bd69f5]/30 dark:border-gray-800 rounded-2xl p-4 sm:p-6 text-center text-white shadow-lg">
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-white dark:text-[#bd69f5]">3+</h3>
-                <p class="font-semibold text-xs sm:text-sm text-white/90 dark:text-gray-300 mt-1">
-                    Major Projects
-                </p>
-            </div>
+                <div class="bg-gray-50 dark:bg-gray-800/80 border border-gray-200/70 dark:border-gray-700/70 rounded-2xl p-4 sm:p-6 text-center text-gray-900 dark:text-white shadow-sm">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-[#bd69f5]">3+</h3>
+                    <p class="font-semibold text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        Major Projects
+                    </p>
+                </div>
 
-            <div class="bg-[#bd69f5] dark:bg-gray-900 border border-[#bd69f5]/30 dark:border-gray-800 rounded-2xl p-4 sm:p-6 text-center text-white shadow-lg">
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-white dark:text-[#bd69f5]">200+</h3>
-                <p class="font-semibold text-xs sm:text-sm text-white/90 dark:text-gray-300 mt-1">
-                    REST API Endpoints Built
-                </p>
-            </div>
+                <div class="bg-gray-50 dark:bg-gray-800/80 border border-gray-200/70 dark:border-gray-700/70 rounded-2xl p-4 sm:p-6 text-center text-gray-900 dark:text-white shadow-sm">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-[#bd69f5]">200+</h3>
+                    <p class="font-semibold text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        REST Endpoints
+                    </p>
+                </div>
 
-            <div class="bg-[#bd69f5] dark:bg-gray-900 border border-[#bd69f5]/30 dark:border-gray-800 rounded-2xl p-4 sm:p-6 text-center text-white shadow-lg">
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-white dark:text-[#bd69f5]">18+</h3>
-                <p class="font-semibold text-xs sm:text-sm text-white/90 dark:text-gray-300 mt-1">
-                    Database Models Designed
-                </p>
+                <div class="bg-gray-50 dark:bg-gray-800/80 border border-gray-200/70 dark:border-gray-700/70 rounded-2xl p-4 sm:p-6 text-center text-gray-900 dark:text-white shadow-sm">
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-[#bd69f5]">18+</h3>
+                    <p class="font-semibold text-xs sm:text-sm text-gray-600 dark:text-gray-300 mt-1">
+                        Database Models
+                    </p>
+                </div>
+
             </div>
 
         </div>
 
-    </div>
-
-    <!-- Right Image -->
-    <div class="hidden lg:flex justify-center items-center">
-        <img src="{% static 'images/office.png' %}" alt="Naresh Profile"
-            loading="lazy"
-            class="w-72 h-72 sm:w-96 sm:h-96 object-cover rounded-3xl shadow-2xl ring-4 ring-[#bd69f5]/40" />
+        <!-- Right Image -->
+        <div class="hidden lg:flex justify-center items-center">
+            <img src="{% static 'images/office.png' %}" alt="Naresh Profile"
+                loading="lazy"
+                class="w-72 h-72 sm:w-96 sm:h-96 object-cover rounded-3xl shadow-2xl ring-4 ring-[#bd69f5]/40" />
+        </div>
     </div>
 </div>
 
-<!-- Skills Section -->
-<div>
+<!-- Technical Skills & Tools Card Container -->
+<div class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200/60 dark:border-gray-800/60 rounded-2xl md:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-xl transition-colors duration-300">
     <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
         <div>
             <h3 class="text-3xl sm:text-4xl font-extrabold text-[#bd69f5] tracking-tight">

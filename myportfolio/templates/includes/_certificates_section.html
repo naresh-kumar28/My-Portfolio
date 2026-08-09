@@ -1,7 +1,8 @@
 {% load static %}
 
-<!-- Certifications Section -->
-<div x-data="{ certModalOpen: false, activeCert: {} }" class="mt-16">
+<div x-data="{ certModalOpen: false, activeCert: {} }" 
+     x-init="$watch('certModalOpen', val => document.body.style.overflow = val ? 'hidden' : '')"
+     class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200/60 dark:border-gray-800/60 rounded-2xl md:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-xl transition-colors duration-300">
     <div class="text-center mb-10">
         <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
             Certifications & <span class="text-[#bd69f5]">Credentials</span>
@@ -12,11 +13,11 @@
     <!-- Certificates Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {% for cert in certificates %}
-        <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-950/60 border border-gray-200 dark:border-gray-800 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group">
+        <div class="bg-gray-50 dark:bg-gray-800/60 rounded-xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-950/60 border border-gray-200/70 dark:border-gray-700/60 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group">
             
             <div>
                 <!-- Image Container Frame -->
-                <div class="relative overflow-hidden aspect-[4/3] bg-gray-50 dark:bg-gray-800/80 cursor-pointer p-3 border-b border-gray-200 dark:border-gray-800"
+                <div class="relative overflow-hidden aspect-[4/3] bg-gray-100 dark:bg-gray-800/80 cursor-pointer p-3 border-b border-gray-200 dark:border-gray-700/60"
                      @click="activeCert = { title: '{{ cert.title|escapejs }}', issuer: '{{ cert.issuer|escapejs }}', image: '{{ cert.display_image_url|escapejs }}', date: '{{ cert.issue_date|default:''|escapejs }}', url: '{{ cert.credential_url|default:''|escapejs }}' }; certModalOpen = true;">
                     {% if cert.display_image_url %}
                     <img src="{{ cert.display_image_url }}" alt="{{ cert.title }}"
@@ -55,7 +56,7 @@
             {% if cert.credential_url %}
             <div class="p-6 pt-0">
                 <a href="{{ cert.credential_url }}" target="_blank"
-                   class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xs font-bold hover:bg-[#bd69f5] hover:text-white transition">
+                   class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs font-bold hover:bg-[#bd69f5] hover:text-white transition">
                     <i class="fa-solid fa-shield-check"></i> Verify Credential
                 </a>
             </div>
@@ -70,49 +71,52 @@
         {% endfor %}
     </div>
 
-    <!-- Certificate Full Screen Modal -->
-    <div x-show="certModalOpen"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95"
-         @keydown.escape.window="certModalOpen = false"
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md"
-         style="display: none;">
-        
-        <div @click.away="certModalOpen = false" 
-             class="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 relative space-y-6">
+    <!-- Certificate Full Screen Modal (Teleported to Body) -->
+    <template x-teleport="body">
+        <div x-show="certModalOpen"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             @keydown.escape.window="certModalOpen = false"
+             @click.self="certModalOpen = false"
+             class="fixed inset-0 z-[9999] w-screen h-screen flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md"
+             style="display: none;">
             
-            <!-- Close Button -->
-            <button @click="certModalOpen = false" 
-                    aria-label="Close Modal"
-                    class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white flex items-center justify-center transition shadow-md">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
+            <div @click.stop
+                 class="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto modal-scrollable-content shadow-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 relative space-y-6">
+                
+                <!-- Sticky Top Close Button -->
+                <button @click="certModalOpen = false" 
+                        aria-label="Close Modal"
+                        class="sticky top-0 float-right -mt-1 -mr-1 z-50 w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white flex items-center justify-center transition shadow-md border border-gray-200 dark:border-gray-700">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
 
-            <!-- Modal Content -->
-            <div>
-                <span class="inline-block text-xs font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-3 py-1 rounded-full mb-2" x-text="activeCert.issuer"></span>
-                <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white" x-text="activeCert.title"></h3>
-            </div>
-
-            <!-- Full Certificate Image -->
-            <template x-if="activeCert.image">
-                <div class="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/80 p-2 flex items-center justify-center">
-                    <img :src="activeCert.image" :alt="activeCert.title" 
-                         class="w-full max-h-[65vh] object-contain rounded-md border border-gray-200 dark:border-gray-700/80 shadow-md" />
+                <!-- Modal Content -->
+                <div>
+                    <span class="inline-block text-xs font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-3 py-1 rounded-full mb-2" x-text="activeCert.issuer"></span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white pr-12" x-text="activeCert.title"></h3>
                 </div>
-            </template>
 
-            <!-- Optional External Verification Button -->
-            <template x-if="activeCert.url">
-                <a :href="activeCert.url" target="_blank" 
-                   class="inline-flex items-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold hover:scale-105 transition shadow-lg text-sm">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Official Credential Link
-                </a>
-            </template>
+                <!-- Full Certificate Image -->
+                <template x-if="activeCert.image">
+                    <div class="w-full rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/60 p-1 sm:p-2">
+                        <img :src="activeCert.image" :alt="activeCert.title" 
+                             class="w-full h-auto max-h-[75vh] object-contain rounded-lg border border-gray-200/80 dark:border-gray-700/80 shadow-md block" />
+                    </div>
+                </template>
+
+                <!-- Optional External Verification Button -->
+                <template x-if="activeCert.url">
+                    <a :href="activeCert.url" target="_blank" 
+                       class="inline-flex items-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold hover:scale-105 transition shadow-lg text-sm">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Official Credential Link
+                    </a>
+                </template>
+            </div>
         </div>
-    </div>
+    </template>
 </div>

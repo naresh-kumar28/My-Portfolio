@@ -1,80 +1,84 @@
 {% load static %}
 
-<!-- Heading -->
-<div class="text-center mb-10">
-    <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-        Achievements & <span class="text-[#bd69f5]">Milestones</span>
-    </h2>
-    <p class="text-gray-600 dark:text-gray-400 mt-2 text-lg font-medium">Moments that shaped my journey as a developer.</p>
-</div>
-
-<!-- Hero image slider section -->
-<div class="mb-16" 
-         x-data='{ 
-             active: 0, 
-             slides: [
-                 { src: "{% static "images/team.jpg" %}", alt: "Hackathon Achievements" },
-                 { src: "{% static "images/award.jpg" %}", alt: "Award Ceremony" }
-             ],
-             timer: null,
-             start() { this.timer = setInterval(() => { this.next(); }, 4000); },
-             stop() { clearInterval(this.timer); },
-             next() { this.active = (this.active + 1) % this.slides.length; },
-             prev() { this.active = (this.active - 1 + this.slides.length) % this.slides.length; }
-         }'
-         x-init="start()"
-         @mouseenter="stop()"
-         @mouseleave="start()">
-
-    <div class="relative w-full h-64 sm:h-80 md:h-[450px] lg:h-[520px] overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl ring-4 ring-white dark:ring-gray-800 bg-gray-900 group">
-        
-        <!-- Slides Loop -->
-        <template x-for="(slide, index) in slides" :key="index">
-            <div x-show="active === index" 
-                 x-transition:enter="transition ease-out duration-500"
-                 x-transition:enter-start="opacity-0 scale-95"
-                 x-transition:enter-end="opacity-100 scale-100"
-                 x-transition:leave="transition ease-in duration-300"
-                 x-transition:leave-start="opacity-100 scale-100"
-                 x-transition:leave-end="opacity-0 scale-95"
-                 class="absolute inset-0 w-full h-full">
-                <img :src="slide.src" :alt="slide.alt" 
-                     loading="lazy" decoding="async"
-                     class="w-full h-full object-cover object-top rounded-2xl md:rounded-3xl group-hover:scale-105 transition-transform duration-700" />
-            </div>
-        </template>
-
-        <!-- Previous Button -->
-        <button @click="prev()" 
-                aria-label="Previous slide"
-                class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
-            <i class="fa-solid fa-chevron-left text-sm sm:text-base"></i>
-        </button>
-
-        <!-- Next Button -->
-        <button @click="next()" 
-                aria-label="Next slide"
-                class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
-            <i class="fa-solid fa-chevron-right text-sm sm:text-base"></i>
-        </button>
-
-        <!-- Dot Indicators Loop -->
-        <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 bg-black/40 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full">
-            <template x-for="(slide, index) in slides" :key="index">
-                <button @click="active = index" 
-                        :class="active === index ? 'bg-[#bd69f5] w-6' : 'bg-white/50 hover:bg-white w-2.5'" 
-                        class="h-2.5 rounded-full transition-all duration-300 focus:outline-none"
-                        :aria-label="'Slide ' + (index + 1)"></button>
-            </template>
-        </div>
+<!-- Achievements & Milestones Card Container -->
+<div class="bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-gray-200/60 dark:border-gray-800/60 rounded-2xl md:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-xl transition-colors duration-300 mb-12 md:mb-16">
+    <!-- Heading -->
+    <div class="text-center mb-10">
+        <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+            Achievements & <span class="text-[#bd69f5]">Milestones</span>
+        </h2>
+        <p class="text-gray-600 dark:text-gray-400 mt-2 text-lg font-medium">Moments that shaped my journey as a developer.</p>
     </div>
 
-    <!-- Caption -->
-    <p class="text-center text-gray-600 dark:text-gray-400 text-sm sm:text-base font-medium mt-4 flex items-center justify-center gap-2">
-        🏆 <span class="font-semibold text-gray-800 dark:text-gray-200">Hackathon Winner Team</span> 
-        <span class="text-gray-400 dark:text-gray-500">•</span>
-        <span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Award Ceremony</span>
-    </p>
+    <!-- Hero image slider section -->
+    <div 
+             x-data='{ 
+                 active: 0, 
+                 slides: [
+                     { src: "{% static "images/team.jpg" %}", alt: "Hackathon Achievements" },
+                     { src: "{% static "images/award.jpg" %}", alt: "Award Ceremony" }
+                 ],
+                 timer: null,
+                 start() { this.timer = setInterval(() => { this.next(); }, 4000); },
+                 stop() { clearInterval(this.timer); },
+                 next() { this.active = (this.active + 1) % this.slides.length; },
+                 prev() { this.active = (this.active - 1 + this.slides.length) % this.slides.length; }
+             }'
+             x-init="start()"
+             @mouseenter="stop()"
+             @mouseleave="start()">
+
+        <div class="relative w-full h-64 sm:h-80 md:h-[450px] lg:h-[520px] overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl ring-4 ring-white dark:ring-gray-800 bg-gray-900 group">
+            
+            <!-- Slides Loop -->
+            <template x-for="(slide, index) in slides" :key="index">
+                <div x-show="active === index" 
+                     x-transition:enter="transition ease-out duration-500"
+                     x-transition:enter-start="opacity-0 scale-95"
+                     x-transition:enter-end="opacity-100 scale-100"
+                     x-transition:leave="transition ease-in duration-300"
+                     x-transition:leave-start="opacity-100 scale-100"
+                     x-transition:leave-end="opacity-0 scale-95"
+                     class="absolute inset-0 w-full h-full">
+                    <img :src="slide.src" :alt="slide.alt" 
+                         loading="lazy" decoding="async"
+                         class="w-full h-full object-cover object-top rounded-2xl md:rounded-3xl group-hover:scale-105 transition-transform duration-700" />
+                </div>
+            </template>
+
+            <!-- Previous Button -->
+            <button @click="prev()" 
+                    aria-label="Previous slide"
+                    class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
+                <i class="fa-solid fa-chevron-left text-sm sm:text-base"></i>
+            </button>
+
+            <!-- Next Button -->
+            <button @click="next()" 
+                    aria-label="Next slide"
+                    class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white p-2.5 sm:p-3.5 rounded-full backdrop-blur-md border border-white/20 transition-all duration-300 focus:outline-none hover:scale-110 shadow-lg">
+                <i class="fa-solid fa-chevron-right text-sm sm:text-base"></i>
+            </button>
+
+            <!-- Dot Indicators Loop -->
+            <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20 flex gap-2 bg-black/40 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full">
+                <template x-for="(slide, index) in slides" :key="index">
+                    <button @click="active = index" 
+                            :class="active === index ? 'bg-[#bd69f5] w-6' : 'bg-white/50 hover:bg-white w-2.5'" 
+                            class="h-2.5 rounded-full transition-all duration-300 focus:outline-none"
+                            :aria-label="'Slide ' + (index + 1)"></button>
+                </template>
+            </div>
+        </div>
+
+        <!-- Caption -->
+        <p class="text-center text-gray-600 dark:text-gray-400 text-xs sm:text-base font-medium mt-6 sm:mt-12 flex items-center justify-center gap-1.5 sm:gap-2 whitespace-nowrap">
+            <span>🏆</span>
+            <span class="font-semibold text-gray-800 dark:text-gray-200">Hackathon Winner Team</span> 
+            <span class="text-gray-400 dark:text-gray-500">•</span>
+            <span class="text-gray-500 dark:text-gray-400">Award Ceremony</span>
+        </p>
+    </div>
 </div>
 
 {% include "includes/_certificates_section.html" %}

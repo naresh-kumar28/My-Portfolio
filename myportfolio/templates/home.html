@@ -6,8 +6,9 @@
 
 {% block content %}
 
-<!-- Main Single Page Container -->
-<div x-data="{ modalOpen: false, currentProject: {} }" class="space-y-16 md:space-y-24 pb-16">
+<div x-data="{ modalOpen: false, currentProject: {} }" 
+     x-init="$watch('modalOpen', val => document.body.style.overflow = val ? 'hidden' : '')"
+     class="space-y-16 md:space-y-24 pb-16">
 
     <!-- 1. HERO SECTION -->
     <section id="home" class="py-6 w-full bg-cover bg-center dark:bg-none transition-colors duration-300 scroll-mt-20"
@@ -53,79 +54,82 @@
     </section>
 
     <!-- 2. ABOUT & SKILLS SECTION -->
-    <section id="about" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-6 scroll-mt-20">
+    <section id="about" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
         {% include "includes/_about_section.html" %}
     </section>
 
     <!-- 3. PROJECTS SECTION -->
-    <section id="project" class="px-4 sm:px-6 lg:px-16 max-w-7xl mx-auto scroll-mt-20">
+    <section id="project" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
         {% include "includes/_projects_section.html" %}
     </section>
 
     <!-- 4. ACHIEVEMENTS SECTION -->
-    <section id="achievements" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+    <section id="achievements" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
         {% include "includes/_achievements_section.html" %}
     </section>
 
     <!-- 5. CONTACT SECTION -->
-    <section id="contact" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+    <section id="contact" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-24">
         {% include "includes/_contact_section.html" %}
     </section>
 
-    <!-- Quick View Modal (Alpine.js) -->
-    <div x-show="modalOpen"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95"
-         @keydown.escape.window="modalOpen = false"
-         class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm"
-         style="display: none;">
-        
-        <div @click.away="modalOpen = false" 
-             class="bg-white dark:bg-gray-900 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 relative space-y-6">
+    <!-- Quick View Modal (Alpine.js Teleported to Body) -->
+    <template x-teleport="body">
+        <div x-show="modalOpen"
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 scale-100"
+             x-transition:leave-end="opacity-0 scale-95"
+             @keydown.escape.window="modalOpen = false"
+             @click.self="modalOpen = false"
+             class="fixed inset-0 z-[9999] w-screen h-screen flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md"
+             style="display: none;">
             
-            <!-- Close Button -->
-            <button @click="modalOpen = false" 
-                    aria-label="Close Modal"
-                    class="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white flex items-center justify-center transition">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
+            <div @click.stop 
+                 class="bg-white dark:bg-gray-900 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto modal-scrollable-content shadow-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 relative space-y-6">
+                
+                <!-- Sticky Top Close Button -->
+                <button @click="modalOpen = false" 
+                        aria-label="Close Modal"
+                        class="sticky top-0 float-right -mt-1 -mr-1 z-50 w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white flex items-center justify-center transition shadow-md border border-gray-200 dark:border-gray-700">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
 
-            <!-- Modal Image -->
-            <template x-if="currentProject.image">
-                <img :src="currentProject.image" :alt="currentProject.name" 
-                     class="w-full h-56 sm:h-72 object-cover rounded-2xl shadow-md border border-gray-100 dark:border-gray-800" />
-            </template>
-
-            <!-- Title & Tech -->
-            <div>
-                <span class="inline-block text-xs font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-3 py-1 rounded-full mb-2" x-text="currentProject.technology"></span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white" x-text="currentProject.name"></h2>
-            </div>
-
-            <!-- Description -->
-            <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed whitespace-pre-line" x-text="currentProject.about"></p>
-
-            <!-- Links -->
-            <div class="flex flex-wrap gap-4 pt-2">
-                <template x-if="currentProject.demoUrl">
-                    <a :href="currentProject.demoUrl" target="_blank" 
-                       class="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold hover:scale-105 transition shadow-lg">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Live Demo
-                    </a>
+                <!-- Modal Image -->
+                <template x-if="currentProject.image">
+                    <img :src="currentProject.image" :alt="currentProject.name" 
+                         class="w-full h-56 sm:h-72 object-cover rounded-2xl shadow-md border border-gray-100 dark:border-gray-800" />
                 </template>
-                <template x-if="currentProject.githubUrl">
-                    <a :href="currentProject.githubUrl" target="_blank" 
-                       class="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gray-900 dark:bg-gray-800 text-white font-bold hover:bg-black dark:hover:bg-gray-700 transition">
-                        <i class="fa-brands fa-github"></i> GitHub Source
-                    </a>
-                </template>
+
+                <!-- Title & Tech -->
+                <div>
+                    <span class="inline-block text-xs font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-3 py-1 rounded-full mb-2" x-text="currentProject.technology"></span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white pr-10" x-text="currentProject.name"></h2>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-700 dark:text-gray-300 text-base leading-relaxed whitespace-pre-line" x-text="currentProject.about"></p>
+
+                <!-- Links -->
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <template x-if="currentProject.demoUrl">
+                        <a :href="currentProject.demoUrl" target="_blank" 
+                           class="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold hover:scale-105 transition shadow-lg">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Live Demo
+                        </a>
+                    </template>
+                    <template x-if="currentProject.githubUrl">
+                        <a :href="currentProject.githubUrl" target="_blank" 
+                           class="flex-1 min-w-[140px] flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-gray-900 dark:bg-gray-800 text-white font-bold hover:bg-black dark:hover:bg-gray-700 transition">
+                            <i class="fa-brands fa-github"></i> GitHub Source
+                        </a>
+                    </template>
+                </div>
             </div>
         </div>
-    </div>
+    </template>
 
 </div>
 
