@@ -1,0 +1,417 @@
+[
+    {
+        "model": "admin.logentry",
+        "pk": 1,
+        "fields": {
+            "action_time": "2026-02-09T14:57:16.846Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "1",
+            "object_repr": "Event Management Website",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Project image\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 2,
+        "fields": {
+            "action_time": "2026-02-12T04:46:23.632Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "3",
+            "object_repr": "Flipkart Clone",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Image url\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 3,
+        "fields": {
+            "action_time": "2026-03-22T05:38:16.908Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "3",
+            "object_repr": "Flipkart Clone",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Project url\", \"Github url\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 4,
+        "fields": {
+            "action_time": "2026-03-22T05:50:31.433Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "1",
+            "object_repr": "Event Management Website",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Project url\", \"Github url\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 5,
+        "fields": {
+            "action_time": "2026-03-22T05:55:50.145Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "2",
+            "object_repr": "Facebook Login Page",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Project url\", \"Github url\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 6,
+        "fields": {
+            "action_time": "2026-03-22T06:27:07.120Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "2",
+            "object_repr": "Facebook Login Page",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Project image\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 7,
+        "fields": {
+            "action_time": "2026-03-22T06:27:15.938Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "2",
+            "object_repr": "Facebook Login Page",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Image url\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 8,
+        "fields": {
+            "action_time": "2026-03-22T06:27:26.648Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "1",
+            "object_repr": "Event Management Website",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Project image\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 9,
+        "fields": {
+            "action_time": "2026-03-22T06:28:04.246Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "1",
+            "object_repr": "Event Management Website",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Image url\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 10,
+        "fields": {
+            "action_time": "2026-03-27T05:53:29.816Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "2",
+            "object_repr": "Facebook Login Page",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Image url\"]}}]"
+        }
+    },
+    {
+        "model": "admin.logentry",
+        "pk": 11,
+        "fields": {
+            "action_time": "2026-03-27T05:53:50.266Z",
+            "user": 1,
+            "content_type": 9,
+            "object_id": "1",
+            "object_repr": "Event Management Website",
+            "action_flag": 2,
+            "change_message": "[{\"changed\": {\"fields\": [\"Image url\"]}}]"
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$1200000$9S8MZalwLs1trmYeBfhqoq$iyndcyOI/oLuOSc4wtW4kGDyWy/7bET1+4fVz7B3Dao=",
+            "last_login": "2026-08-07T13:33:22.181Z",
+            "is_superuser": true,
+            "username": "asus",
+            "first_name": "",
+            "last_name": "",
+            "email": "raja@gmail.com",
+            "is_staff": true,
+            "is_active": true,
+            "date_joined": "2026-02-09T11:55:35.629Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$1200000$BHo64q5E8vaQLExdM7V02l$OYAHavaffLLahLTOZsV2aqP76NWkFPM6kI5oBo9w4NM=",
+            "last_login": "2026-03-27T05:42:01.667Z",
+            "is_superuser": false,
+            "username": "rajatek28",
+            "first_name": "Raja",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2026-02-09T16:07:08.231Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$1200000$UiLwLSAF6E7nns1uRUU3Rx$90Re6FLA69vBhIl5t2LqPjLZadqzVyANH6DXtbT6DuE=",
+            "last_login": "2026-02-11T16:16:31.390Z",
+            "is_superuser": false,
+            "username": "sonu22",
+            "first_name": "Sonu",
+            "last_name": "",
+            "email": "",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2026-02-09T16:27:42.146Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "1o2l3n066velzxtth6fkwq33urchn7az",
+        "fields": {
+            "session_data": ".eJxVjDsOwyAQRO9CHSEwsOCU6X0Ga9mF4CQCyZ8qyt1jSy6SZop5b-YtRtzWMm5LmseJxVVocfntItIz1QPwA-u9SWp1nacoD0WedJFD4_S6ne7fQcGl7GsFpHvunAPvNPQQdAx7ZOq0oQg-eG9VjmSYWLHKjGgZTK9sB9qjEZ8vuA43EA:1w5zz1:snMGWsaPeIcvV5PZxtemowfJ4lIX1-PQakqbsVbiiko",
+            "expire_date": "2026-04-10T05:43:47.927Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "3cjzv7mje8n3j84r9g8d83u8db7r3pnh",
+        "fields": {
+            "session_data": ".eJxVjDsOwyAQRO9CHSEwsOCU6X0Ga9mF4CQCyZ8qyt1jSy6SZop5b-YtRtzWMm5LmseJxVVocfntItIz1QPwA-u9SWp1nacoD0WedJFD4_S6ne7fQcGl7GsFpHvunAPvNPQQdAx7ZOq0oQg-eG9VjmSYWLHKjGgZTK9sB9qjEZ8vuA43EA:1w4BUr:ByV9O65m3H8u1s_OEz6w66bGaOhY1uQCOIEkJnKDnKI",
+            "expire_date": "2026-04-05T05:37:09.450Z"
+        }
+    },
+    {
+        "model": "sessions.session",
+        "pk": "poxmeqch3yo3ckjbiypw9htaesebznyc",
+        "fields": {
+            "session_data": ".eJxVjDsOwyAQRO9CHSEwsOCU6X0Ga9mF4CQCyZ8qyt1jSy6SZop5b-YtRtzWMm5LmseJxVVocfntItIz1QPwA-u9SWp1nacoD0WedJFD4_S6ne7fQcGl7GsFpHvunAPvNPQQdAx7ZOq0oQg-eG9VjmSYWLHKjGgZTK9sB9qjEZ8vuA43EA:1vqOVN:6DGUMNGKTRynf07tWkN9EyD8SThV_kgd5eUB00WOyds",
+            "expire_date": "2026-02-26T04:40:41.833Z"
+        }
+    },
+    {
+        "model": "axes.accesslog",
+        "pk": 1,
+        "fields": {
+            "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
+            "ip_address": "127.0.0.1",
+            "username": "asus",
+            "http_accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "path_info": "/accounts/login/",
+            "attempt_time": "2026-08-07T13:33:22.170Z",
+            "logout_time": "2026-08-08T19:35:40.713Z",
+            "session_hash": "157e1e56dd48bbbeea1d4e01318d792f789a90ec5e00dec45042048960d412e3"
+        }
+    },
+    {
+        "model": "portfolio.skill",
+        "pk": 1,
+        "fields": {
+            "skill_name": "HTML",
+            "svg_code": "<i class=\"fa-brands fa-html5\"></i>"
+        }
+    },
+    {
+        "model": "portfolio.skill",
+        "pk": 2,
+        "fields": {
+            "skill_name": "CSS",
+            "svg_code": "<i class=\"fa-brands fa-css\"></i>"
+        }
+    },
+    {
+        "model": "portfolio.skill",
+        "pk": 3,
+        "fields": {
+            "skill_name": "Tailwind",
+            "svg_code": "<i class=\"fa-brands fa-css3\"></i>"
+        }
+    },
+    {
+        "model": "portfolio.skill",
+        "pk": 4,
+        "fields": {
+            "skill_name": "Python",
+            "svg_code": "<i class=\"fa-brands fa-python\"></i>"
+        }
+    },
+    {
+        "model": "portfolio.skill",
+        "pk": 5,
+        "fields": {
+            "skill_name": "django",
+            "svg_code": "<i class=\"fa-brands fa-python\"></i>"
+        }
+    },
+    {
+        "model": "portfolio.skill",
+        "pk": 6,
+        "fields": {
+            "skill_name": "Git & GitHub",
+            "svg_code": "<i class=\"fa-brands fa-github\"></i>"
+        }
+    },
+    {
+        "model": "portfolio.contact",
+        "pk": 2,
+        "fields": {
+            "name": "Donovan Carey",
+            "email": "folarosyz@mailinator.com",
+            "contact": "+15779688287",
+            "message": "Porro iure non in es"
+        }
+    },
+    {
+        "model": "portfolio.contact",
+        "pk": 3,
+        "fields": {
+            "name": "Zephr Crawford",
+            "email": "kyhekip@mailinator.com",
+            "contact": "+15588284882",
+            "message": "Est saepe sit dolore"
+        }
+    },
+    {
+        "model": "portfolio.contact",
+        "pk": 4,
+        "fields": {
+            "name": "Ferdinand Huff",
+            "email": "symace@mailinator.com",
+            "contact": "+19883965926",
+            "message": "Eum dolorem aliquip "
+        }
+    },
+    {
+        "model": "portfolio.member",
+        "pk": 1,
+        "fields": {
+            "github_avatar_url": "https://avatars.githubusercontent.com/u/202608703?v=4",
+            "member_name": "Naresh Kumar",
+            "member_post": "Backend Developer",
+            "about_member": "I’m a Django developer who builds secure, scalable, and efficient backend web applications.",
+            "linkedin_url": "https://www.linkedin.com/in/codernareshkumar/",
+            "github_url": "https://github.com/naresh-kumar28"
+        }
+    },
+    {
+        "model": "portfolio.member",
+        "pk": 2,
+        "fields": {
+            "github_avatar_url": "https://avatars.githubusercontent.com/u/227848066?v=4",
+            "member_name": "Md Sonu",
+            "member_post": "Frontend Developer",
+            "about_member": "I’m a frontend developer who builds responsive, user-friendly, and visually engaging web interfaces.",
+            "linkedin_url": "https://www.linkedin.com/in/md-sonu/",
+            "github_url": "https://github.com/md-sonu07"
+        }
+    },
+    {
+        "model": "portfolio.member",
+        "pk": 3,
+        "fields": {
+            "github_avatar_url": "https://avatars.githubusercontent.com/u/193601144?v=4",
+            "member_name": "Ankur Jha",
+            "member_post": "Full Stack Developer",
+            "about_member": "I’m a full stack developer who builds complete, scalable web applications from frontend interfaces to backend logic.",
+            "linkedin_url": "https://www.linkedin.com/in/ankur-jha-0a7762331/",
+            "github_url": "https://github.com/ankurjhaaa"
+        }
+    },
+    {
+        "model": "portfolio.member",
+        "pk": 4,
+        "fields": {
+            "github_avatar_url": "https://avatars.githubusercontent.com/u/227798096?v=4",
+            "member_name": "Rahul Kumar Acharya",
+            "member_post": "Backend Developer",
+            "about_member": "I’m a Django developer who builds secure, scalable, and efficient backend web applications.",
+            "linkedin_url": "https://www.linkedin.com/in/rahul-kumar-acharya-796a87321/",
+            "github_url": "https://github.com/rahulkumaracharya199-prog"
+        }
+    },
+    {
+        "model": "portfolio.member",
+        "pk": 5,
+        "fields": {
+            "github_avatar_url": "https://avatars.githubusercontent.com/u/234536043?v=4",
+            "member_name": "Prabhakar Singh",
+            "member_post": "Backend Developer",
+            "about_member": "I’m a Django developer who builds secure, scalable, and efficient backend web applications.",
+            "linkedin_url": "https://www.linkedin.com/in/prabhakar-singh-7880b9323/",
+            "github_url": "https://github.com/prabhakarsingh2007"
+        }
+    },
+    {
+        "model": "portfolio.project",
+        "pk": 1,
+        "fields": {
+            "project_image": "",
+            "image_url": "https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/event.png",
+            "project_name": "Event Management Website",
+            "project_about": "This event management website is built using **HTML and CSS**, focusing on a clean and user-friendly design.\r\nIt presents event details, services, and contact information in a simple and attractive way.",
+            "technology": "HTML, CSS",
+            "project_url": "https://naresh-kumar28.github.io/Event-Management/",
+            "github_url": "https://github.com/naresh-kumar28/Event-Management",
+            "created_at": "2026-02-09T14:36:07.918Z"
+        }
+    },
+    {
+        "model": "portfolio.project",
+        "pk": 2,
+        "fields": {
+            "project_image": "",
+            "image_url": "https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/facebook.png",
+            "project_name": "Facebook Login Page",
+            "project_about": "This Facebook login page clone is created using HTML and CSS, focusing on a clean and responsive layout.",
+            "technology": "HTML , CSS",
+            "project_url": "https://naresh-kumar28.github.io/Facebook-Login/",
+            "github_url": "https://github.com/naresh-kumar28/Facebook-Login",
+            "created_at": "2026-02-09T14:55:04.750Z"
+        }
+    },
+    {
+        "model": "portfolio.project",
+        "pk": 3,
+        "fields": {
+            "project_image": "",
+            "image_url": "https://raw.githubusercontent.com/naresh-kumar28/Assets/refs/heads/main/flipkart.png",
+            "project_name": "Flipkart Clone",
+            "project_about": "I built a Flipkart clone using Tailwind CSS, focusing on creating a clean and responsive user interface. The project replicates key e-commerce features like product listings, navigation bar, and modern layout design.",
+            "technology": "HTML, Tailwind",
+            "project_url": "https://naresh-kumar28.github.io/Flipkart-Clone/",
+            "github_url": "https://github.com/naresh-kumar28/Flipkart-Clone",
+            "created_at": "2026-02-12T04:38:28.758Z"
+        }
+    }
+]

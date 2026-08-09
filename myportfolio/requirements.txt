@@ -1,43 +1,22 @@
-﻿asgiref==3.11.1
-attrs==26.1.0
-certifi==2026.4.22
-cffi==2.1.0
-charset-normalizer==3.4.7
-cloudinary==1.44.2
-crispy-tailwind==1.0.3
-cryptography==49.0.0
-distlib==0.4.0
+# Core Web Framework
 Django==6.0.4
-django-allauth==65.18.0
-django-axes==8.3.1
-django-cloudinary-storage==0.3.0
-django-cors-headers==4.9.0
-django-crispy-forms==2.7
-django-filter==26.1
-djangorestframework==3.17.1
-djangorestframework_simplejwt==5.5.1
-drf-spectacular==0.30.0
-filelock==3.25.2
-gunicorn==26.0.0
-idna==3.13
-inflection==0.5.1
-jsonschema==4.26.0
-jsonschema-specifications==2025.9.1
-packaging==26.2
-pillow==12.2.0
-platformdirs==4.9.4
-pycparser==3.0
-PyJWT==2.12.1
-python-discovery==1.2.1
-python-dotenv==1.2.2
-PyYAML==6.0.3
-referencing==0.37.0
-requests==2.33.1
-rpds-py==2026.6.3
-six==1.17.0
+asgiref==3.11.1
 sqlparse==0.5.5
 tzdata==2026.1
-uritemplate==4.2.0
-urllib3==2.6.3
+
+# Environment Variables & Security
+python-dotenv==1.2.2
+django-axes==8.3.1
+
+# Media & Image Handling
+pillow==12.2.0
+
+# Static Files & Production Web Server
 whitenoise==6.12.0
-yt-dlp==2026.3.17
+gunicorn==26.0.0
+
+# Database & Cloudinary (Production/Deployment)
+dj-database-url
+psycopg2-binary
+cloudinary
+django-cloudinary-storage
