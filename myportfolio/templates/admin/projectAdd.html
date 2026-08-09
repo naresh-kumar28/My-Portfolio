@@ -108,10 +108,8 @@
                 <div>
                     <!-- Image -->
                     <div class="h-40 w-full overflow-hidden bg-gray-200 dark:bg-gray-800 relative">
-                        {% if p.project_image %}
-                        <img src="{{ p.project_image.url }}" alt="{{ p.project_name }}" class="w-full h-full object-cover" />
-                        {% elif p.image_url %}
-                        <img src="{{ p.image_url }}" alt="{{ p.project_name }}" class="w-full h-full object-cover" />
+                        {% if p.display_image_url %}
+                        <img src="{{ p.display_image_url }}" alt="{{ p.project_name }}" class="w-full h-full object-cover" />
                         {% else %}
                         <div class="w-full h-full flex items-center justify-center text-gray-400 text-xs font-semibold">No Image</div>
                         {% endif %}

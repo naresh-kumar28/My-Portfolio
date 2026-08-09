@@ -39,11 +39,12 @@
                 <span>Projects</span>
             </a>
 
-            <a href="{% url 'team-add' %}" 
-               class="flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 {% if '/team' in request.path %} bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold shadow-lg shadow-[#bd69f5]/25 {% else %} text-gray-400 hover:bg-gray-800 hover:text-white {% endif %}">
-                <i class="fa-solid fa-users-gear text-base"></i>
-                <span>Team Members</span>
+            <a href="{% url 'certificate-add' %}" 
+               class="flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 {% if '/certificate' in request.path %} bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold shadow-lg shadow-[#bd69f5]/25 {% else %} text-gray-400 hover:bg-gray-800 hover:text-white {% endif %}">
+                <i class="fa-solid fa-certificate text-base"></i>
+                <span>Certificates</span>
             </a>
+
 
             <a href="{% url 'add-skill' %}" 
                class="flex items-center gap-3 py-3 px-4 rounded-xl transition-all duration-200 {% if '/skill' in request.path %} bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold shadow-lg shadow-[#bd69f5]/25 {% else %} text-gray-400 hover:bg-gray-800 hover:text-white {% endif %}">

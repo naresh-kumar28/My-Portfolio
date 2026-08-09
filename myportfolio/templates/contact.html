@@ -27,7 +27,7 @@
             return;
         }
 
-        const phoneNumber = "917070509185"; 
+        const phoneNumber = "{{ WHATSAPP_NUMBER }}"; 
         const text = `Hello 👋%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMobile: ${encodeURIComponent(contact)}%0AMessage: ${encodeURIComponent(message)}`;
         window.open(`https://wa.me/${phoneNumber}?text=${text}`, "_blank");
     }

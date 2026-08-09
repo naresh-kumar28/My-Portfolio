@@ -4,7 +4,7 @@
         Featured Projects
     </h2>
     <p class="text-gray-600 dark:text-gray-300 font-medium text-lg sm:text-xl max-w-2xl mx-auto">
-        A showcase of web applications, APIs, and creative digital solutions I’ve built.
+        A collection of full-stack web platforms — from e-commerce systems to content management tools — built with Django, REST APIs, and modern frontend technologies.
     </p>
 </div>
 
@@ -16,13 +16,9 @@
         <div>
             <!-- Image Container -->
             <div class="relative overflow-hidden aspect-video bg-gray-100 dark:bg-gray-800">
-                {% if project.project_image %}
-                <img src="{{ project.project_image.url }}" alt="{{ project.project_name }}"
-                    loading="lazy"
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                {% elif project.image_url %}
-                <img src="{{ project.image_url }}" alt="{{ project.project_name }}"
-                    loading="lazy"
+                {% if project.display_image_url %}
+                <img src="{{ project.display_image_url }}" alt="{{ project.project_name }}"
+                    loading="lazy" decoding="async"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 {% else %}
                 <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 dark:text-gray-600">
@@ -37,7 +33,7 @@
                                 name: '{{ project.project_name|escapejs }}',
                                 about: '{{ project.project_about|escapejs }}',
                                 technology: '{{ project.technology|escapejs }}',
-                                image: '{% if project.project_image %}{{ project.project_image.url }}{% else %}{{ project.image_url }}{% endif %}',
+                                image: '{{ project.display_image_url|escapejs }}',
                                 demoUrl: '{{ project.project_url|escapejs }}',
                                 githubUrl: '{{ project.github_url|escapejs }}'
                             }; modalOpen = true;"
@@ -93,3 +89,21 @@
     </div>
     {% endfor %}
 </div>
+
+{% if projects.has_other_pages %}
+<div class="flex items-center justify-center gap-4 mt-12">
+    {% if projects.has_previous %}
+    <a href="?page={{ projects.previous_page_number }}" class="px-5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 font-bold text-sm hover:bg-[#bd69f5] hover:text-white transition shadow-sm">
+        &laquo; Previous
+    </a>
+    {% endif %}
+    <span class="text-sm font-semibold text-gray-500 dark:text-gray-400">
+        Page {{ projects.number }} of {{ projects.paginator.num_pages }}
+    </span>
+    {% if projects.has_next %}
+    <a href="?page={{ projects.next_page_number }}" class="px-5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 font-bold text-sm hover:bg-[#bd69f5] hover:text-white transition shadow-sm">
+        Next &raquo;
+    </a>
+    {% endif %}
+</div>
+{% endif %}

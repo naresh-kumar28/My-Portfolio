@@ -1,0 +1,118 @@
+{% load static %}
+
+<!-- Certifications Section -->
+<div x-data="{ certModalOpen: false, activeCert: {} }" class="mt-16">
+    <div class="text-center mb-10">
+        <h3 class="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+            Certifications & <span class="text-[#bd69f5]">Credentials</span>
+        </h3>
+        <p class="text-gray-600 dark:text-gray-400 mt-2 text-base font-medium">Verified courses and technical certifications backing up my expertise.</p>
+    </div>
+
+    <!-- Certificates Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for cert in certificates %}
+        <div class="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-xl dark:shadow-gray-950/60 border border-gray-200 dark:border-gray-800 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group">
+            
+            <div>
+                <!-- Image Container Frame -->
+                <div class="relative overflow-hidden aspect-[4/3] bg-gray-50 dark:bg-gray-800/80 cursor-pointer p-3 border-b border-gray-200 dark:border-gray-800"
+                     @click="activeCert = { title: '{{ cert.title|escapejs }}', issuer: '{{ cert.issuer|escapejs }}', image: '{{ cert.display_image_url|escapejs }}', date: '{{ cert.issue_date|default:''|escapejs }}', url: '{{ cert.credential_url|default:''|escapejs }}' }; certModalOpen = true;">
+                    {% if cert.display_image_url %}
+                    <img src="{{ cert.display_image_url }}" alt="{{ cert.title }}"
+                        loading="lazy" decoding="async"
+                        class="w-full h-full object-cover rounded-md border border-gray-200 dark:border-gray-700/80 shadow-sm group-hover:scale-[1.02] transition-transform duration-500" />
+                    {% else %}
+                    <div class="w-full h-full flex flex-col items-center justify-center text-gray-400 rounded-md border border-gray-200 dark:border-gray-700/80">
+                        <i class="fa-solid fa-certificate text-4xl mb-2 text-[#bd69f5]"></i>
+                        <span class="text-xs font-semibold">Certificate Preview</span>
+                    </div>
+                    {% endif %}
+
+                    <!-- Zoom Overlay Button -->
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-3">
+                        <span class="bg-white/95 dark:bg-gray-900/95 text-gray-900 dark:text-white px-4 py-2 rounded-lg text-xs font-bold shadow-lg flex items-center gap-1.5 border border-gray-200 dark:border-gray-700">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i> View Full Certificate
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Info Block -->
+                <div class="p-6">
+                    <span class="inline-block text-[11px] font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-3 py-1 rounded-full mb-3 border border-[#bd69f5]/20">
+                        <i class="fa-solid fa-award mr-1"></i> {{ cert.issuer }}
+                    </span>
+                    <h4 class="text-xl font-bold text-gray-900 dark:text-white leading-snug">{{ cert.title }}</h4>
+                    {% if cert.issue_date %}
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 flex items-center gap-1.5">
+                        <i class="fa-regular fa-calendar-check text-[#bd69f5]"></i> Issued: {{ cert.issue_date }}
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Footer Link -->
+            {% if cert.credential_url %}
+            <div class="p-6 pt-0">
+                <a href="{{ cert.credential_url }}" target="_blank"
+                   class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xs font-bold hover:bg-[#bd69f5] hover:text-white transition">
+                    <i class="fa-solid fa-shield-check"></i> Verify Credential
+                </a>
+            </div>
+            {% endif %}
+
+        </div>
+        {% empty %}
+        <div class="col-span-full py-12 text-center text-gray-400 text-sm">
+            <i class="fa-solid fa-certificate text-4xl mb-3 text-[#bd69f5]"></i>
+            <p class="font-semibold">No certificates added yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Certificate Full Screen Modal -->
+    <div x-show="certModalOpen"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         @keydown.escape.window="certModalOpen = false"
+         class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md"
+         style="display: none;">
+        
+        <div @click.away="certModalOpen = false" 
+             class="bg-white dark:bg-gray-900 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 relative space-y-6">
+            
+            <!-- Close Button -->
+            <button @click="certModalOpen = false" 
+                    aria-label="Close Modal"
+                    class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white flex items-center justify-center transition shadow-md">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Modal Content -->
+            <div>
+                <span class="inline-block text-xs font-bold uppercase tracking-wider bg-[#bd69f5]/15 text-[#bd69f5] px-3 py-1 rounded-full mb-2" x-text="activeCert.issuer"></span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white" x-text="activeCert.title"></h3>
+            </div>
+
+            <!-- Full Certificate Image -->
+            <template x-if="activeCert.image">
+                <div class="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-800/80 p-2 flex items-center justify-center">
+                    <img :src="activeCert.image" :alt="activeCert.title" 
+                         class="w-full max-h-[65vh] object-contain rounded-md border border-gray-200 dark:border-gray-700/80 shadow-md" />
+                </div>
+            </template>
+
+            <!-- Optional External Verification Button -->
+            <template x-if="activeCert.url">
+                <a :href="activeCert.url" target="_blank" 
+                   class="inline-flex items-center gap-2 py-3 px-6 rounded-xl bg-gradient-to-r from-[#bd69f5] to-pink-500 text-white font-bold hover:scale-105 transition shadow-lg text-sm">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Verify Official Credential Link
+                </a>
+            </template>
+        </div>
+    </div>
+</div>

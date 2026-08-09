@@ -23,17 +23,17 @@
             </div>
         </div>
 
-        <!-- 2. Team Members -->
+        <!-- 2. Certificates -->
         <div class="bg-white dark:bg-gray-900 rounded-3xl p-6 border border-gray-200/80 dark:border-gray-800 shadow-md hover:shadow-xl transition-all flex items-center justify-between group">
             <div>
-                <p class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Team Members</p>
-                <h3 class="text-3xl font-extrabold text-gray-900 dark:text-white mt-1">{{ member_count }}</h3>
-                <a href="{% url 'team-add' %}" class="text-xs text-indigo-500 font-semibold mt-2 inline-flex items-center gap-1 hover:underline">
-                    Manage Team <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                <p class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Certificates</p>
+                <h3 class="text-3xl font-extrabold text-gray-900 dark:text-white mt-1">{{ certificate_count }}</h3>
+                <a href="{% url 'certificate-add' %}" class="text-xs text-indigo-500 font-semibold mt-2 inline-flex items-center gap-1 hover:underline">
+                    Manage Certificates <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
             </div>
             <div class="w-14 h-14 rounded-2xl bg-indigo-500/15 text-indigo-500 flex items-center justify-center text-2xl group-hover:bg-indigo-500 group-hover:text-white transition-colors duration-300">
-                <i class="fa-solid fa-users-gear"></i>
+                <i class="fa-solid fa-certificate"></i>
             </div>
         </div>
 
@@ -78,9 +78,9 @@
                class="bg-[#bd69f5] hover:bg-[#a855d8] text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md transition hover:scale-105 flex items-center gap-1.5">
                 <i class="fa-solid fa-plus"></i> Add Project
             </a>
-            <a href="{% url 'team-add' %}" 
+            <a href="{% url 'certificate-add' %}" 
                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md transition hover:scale-105 flex items-center gap-1.5">
-                <i class="fa-solid fa-user-plus"></i> Add Team Member
+                <i class="fa-solid fa-certificate"></i> Add Certificate
             </a>
             <a href="{% url 'add-skill' %}" 
                class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md transition hover:scale-105 flex items-center gap-1.5">

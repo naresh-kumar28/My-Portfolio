@@ -9,13 +9,13 @@
         </h2>
 
         <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
-            Got a project, idea, or just want to say hi?
-            Drop a message — I usually reply faster than your Wi-Fi reconnects!
+            Got a project, an idea, or just want to say hi? Drop a message — I'll get back to you quickly.
         </p>
 
         <!-- Contact Image Box -->
         <div class="relative w-full h-80 sm:h-96 overflow-hidden rounded-3xl shadow-2xl ring-4 ring-[#bd69f5]/30 group">
             <img src="{% static 'images/contact.png' %}" alt="Contact" 
+                 loading="lazy" decoding="async"
                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
                 <div class="text-white space-y-1">
@@ -35,6 +35,8 @@
               hx-swap="outerHTML"
               class="space-y-5">
             {% csrf_token %}
+            <!-- Honeypot anti-spam field (hidden from humans, filled by bots) -->
+            <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
 
             <div>
                 <label class="block text-sm font-bold mb-1.5 text-white dark:text-gray-200">Your Name</label>

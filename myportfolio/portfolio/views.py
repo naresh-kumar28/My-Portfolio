@@ -1,10 +1,15 @@
-from django.shortcuts import render,redirect
-from .models import Project, Member, Contact, Skill
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.core.paginator import Paginator
+from .models import Project, Contact, Skill, Certificate
+from .forms import ContactForm, ProjectForm, SkillForm, CertificateForm
 
 #login page
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
+
+from django.views.decorators.http import require_POST
 
 staff_required = user_passes_test(lambda u: u.is_authenticated and u.is_staff, login_url='login')
 
@@ -15,15 +20,17 @@ def home(req):
     data = {
         'projects': Project.objects.all().order_by('-created_at'),
         'skills': Skill.objects.all(),
-        'teams': Member.objects.all(),
+        'certificates': Certificate.objects.all().order_by('-id'),
     }
     return render(req, 'home.html', data)
 
 
 def project(req):
-    data = {}
-    data['projects'] = Project.objects.all().order_by('-created_at')
-    return render(req, 'project.html', data)
+    project_list = Project.objects.all().order_by('-created_at')
+    paginator = Paginator(project_list, 9)
+    page_number = req.GET.get('page')
+    projects = paginator.get_page(page_number)
+    return render(req, 'project.html', {'projects': projects})
 
 
 def about(req):
@@ -31,28 +38,32 @@ def about(req):
     data['skills'] = Skill.objects.all()
     return render(req, 'about.html', data)
 
-def team(req):
-    data = {}
-    data['teams'] = Member.objects.all()
-    return render(req, 'team.html', data)
+
+def achievements(req):
+    data = {
+        'certificates': Certificate.objects.all().order_by('-id'),
+    }
+    return render(req, 'achievements.html', data)
 
 
 def contact(req):
-
     if req.method == 'POST':
-        c = Contact()
-        c.name = req.POST.get('name')
-        c.email = req.POST.get('email')
-        c.contact = req.POST.get('contact')
-        c.message = req.POST.get('message')
-        c.save()
+        # Honeypot spam check: if filled, request came from an automated bot
+        if req.POST.get('website'):
+            if req.headers.get('HX-Request'):
+                return render(req, 'includes/contact_success_partial.html')
+            return redirect('contact')
 
-        if req.headers.get('HX-Request'):
-            return render(req, 'includes/contact_success_partial.html')
+        form = ContactForm(req.POST)
+        if form.is_valid():
+            form.save()
+            if req.headers.get('HX-Request'):
+                return render(req, 'includes/contact_success_partial.html')
+            return redirect('contact')
+        else:
+            return render(req, 'contact.html', {'form': form})
 
-        return redirect('contact')
-
-    return render(req, 'contact.html')
+    return render(req, 'contact.html', {'form': ContactForm()})
 
 
 
@@ -60,7 +71,7 @@ def contact(req):
 def adminDashboard(req):
     context = {
         'project_count': Project.objects.count(),
-        'member_count': Member.objects.count(),
+        'certificate_count': Certificate.objects.count(),
         'skill_count': Skill.objects.count(),
         'contact_count': Contact.objects.count(),
         'recent_contacts': Contact.objects.all().order_by('-id')[:5],
@@ -72,24 +83,16 @@ def adminDashboard(req):
 @staff_required
 def projectAdd(req):
     if req.method == 'POST':
-        image = req.FILES.get('project_image')
-        if image and image.size > 5 * 1024 * 1024:  # 5MB limit
+        form = ProjectForm(req.POST, req.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('project-add')
+        else:
             projects = Project.objects.all().order_by('-id')
-            return render(req, 'admin/projectAdd.html', {'error': 'Image size cannot exceed 5MB.', 'projects': projects})
-
-        p = Project()
-        p.project_image = image
-        p.image_url = req.POST.get('image_url')
-        p.project_name = req.POST.get('project_name')
-        p.project_about = req.POST.get('project_about')
-        p.technology = req.POST.get('technology')
-        p.project_url = req.POST.get('project_url')
-        p.github_url = req.POST.get('github_url')
-        p.save()
-        return redirect('project-add')
+            return render(req, 'admin/projectAdd.html', {'form': form, 'projects': projects})
 
     projects = Project.objects.all().order_by('-id')
-    return render(req, 'admin/projectAdd.html', {'projects': projects})
+    return render(req, 'admin/projectAdd.html', {'projects': projects, 'form': ProjectForm()})
 
 
 @staff_required
@@ -103,43 +106,18 @@ def projectDelete(req, id):
 
 
 @staff_required
-def teamAdd(req):
-    if req.method == 'POST':
-        m = Member()
-        m.github_avatar_url = req.POST.get('github_avatar_url')
-        m.member_name = req.POST.get('member_name')
-        m.member_post = req.POST.get('member_post')
-        m.about_member = req.POST.get('about_member')
-        m.linkedin_url = req.POST.get('linkedin_url')
-        m.github_url = req.POST.get('github_url')
-        m.save()
-        return redirect('team-add')
-
-    teams = Member.objects.all().order_by('-id')
-    return render(req, 'admin/teamAdd.html', {'teams': teams})
-
-
-@staff_required
-def teamDelete(req, id):
-    try:
-        m = Member.objects.get(id=id)
-        m.delete()
-    except Member.DoesNotExist:
-        pass
-    return redirect('team-add')
-
-
-@staff_required
 def addSkill(req):
     if req.method == 'POST':
-        s = Skill()
-        s.skill_name = req.POST.get('skill_name')
-        s.svg_code = req.POST.get('svg_code')
-        s.save()
-        return redirect('add-skill')
+        form = SkillForm(req.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('add-skill')
+        else:
+            skills = Skill.objects.all().order_by('-id')
+            return render(req, 'admin/add-skills.html', {'form': form, 'skills': skills})
 
     skills = Skill.objects.all().order_by('-id')
-    return render(req, 'admin/add-skills.html', {'skills': skills})
+    return render(req, 'admin/add-skills.html', {'skills': skills, 'form': SkillForm()})
 
 
 @staff_required
@@ -154,8 +132,11 @@ def skillDelete(req, id):
 
 @staff_required
 def adminContacts(req):
-    contacts = Contact.objects.all().order_by('-id')
-    return render(req, 'admin/contacts.html', {'contacts': contacts})
+    contact_list = Contact.objects.all().order_by('-id')
+    paginator = Paginator(contact_list, 10)
+    page_number = req.GET.get('page')
+    contacts = paginator.get_page(page_number)
+    return render(req, 'admin/contacts.html', {'contacts': contacts, 'total_count': contact_list.count()})
 
 
 @staff_required
@@ -184,9 +165,45 @@ def loginView(req):
     return render(req, 'registration/login.html')
 
 
+@require_POST
 def logoutView(req):
     logout(req)
     return redirect('login')
+
+
+def robots_txt(req):
+    lines = [
+        "User-agent: *",
+        "Disallow: /dashboard-x7k/",
+        "Disallow: /accounts/",
+        "Allow: /",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+@staff_required
+def certificateAdd(req):
+    if req.method == 'POST':
+        form = CertificateForm(req.POST, req.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('certificate-add')
+        else:
+            certificates = Certificate.objects.all().order_by('-id')
+            return render(req, 'admin/certificateAdd.html', {'form': form, 'certificates': certificates})
+
+    certificates = Certificate.objects.all().order_by('-id')
+    return render(req, 'admin/certificateAdd.html', {'certificates': certificates, 'form': CertificateForm()})
+
+
+@staff_required
+def certificateDelete(req, id):
+    try:
+        c = Certificate.objects.get(id=id)
+        c.delete()
+    except Certificate.DoesNotExist:
+        pass
+    return redirect('certificate-add')
 
     
     

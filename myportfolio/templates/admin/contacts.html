@@ -13,7 +13,7 @@
                 <p class="text-xs text-gray-500 dark:text-gray-400">View and manage messages sent by visitors from the website</p>
             </div>
             <span class="bg-[#bd69f5]/15 text-[#bd69f5] font-bold text-xs px-3.5 py-1.5 rounded-full border border-[#bd69f5]/30">
-                Total: {{ contacts|length }}
+                Total: {{ total_count }}
             </span>
         </div>
 
@@ -68,6 +68,27 @@
                 </tbody>
             </table>
         </div>
+
+        {% if contacts.has_other_pages %}
+        <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200 dark:border-gray-800">
+            <span class="text-xs text-gray-500 dark:text-gray-400">
+                Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}
+            </span>
+            <div class="flex gap-2">
+                {% if contacts.has_previous %}
+                <a href="?page={{ contacts.previous_page_number }}" class="px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    &laquo; Previous
+                </a>
+                {% endif %}
+                {% if contacts.has_next %}
+                <a href="?page={{ contacts.next_page_number }}" class="px-3.5 py-1.5 text-xs font-semibold rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    Next &raquo;
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
     </div>
 
 </div>

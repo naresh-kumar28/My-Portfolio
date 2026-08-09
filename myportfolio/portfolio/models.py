@@ -21,18 +21,6 @@ class Contact(models.Model):
         return self.name
 
 
-class Member(models.Model):
-    github_avatar_url = models.URLField()
-    member_name = models.CharField(max_length=100)
-    member_post = models.CharField(max_length=100)
-    about_member = models.CharField(max_length=200)
-    linkedin_url = models.URLField()
-    github_url = models.URLField()
-
-    def __str__(self):
-        return self.member_name
-
-
 class Project(models.Model):
     project_image = models.ImageField(
         upload_to='project/images/',
@@ -48,6 +36,35 @@ class Project(models.Model):
     github_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
+    @property
+    def display_image_url(self):
+        if self.project_image:
+            return self.project_image.url
+        return self.image_url or ''
+
     def __str__(self):
         return self.project_name
+
+
+class Certificate(models.Model):
+    title = models.CharField(max_length=150)
+    issuer = models.CharField(max_length=150)
+    certificate_image = models.ImageField(
+        upload_to='certificates/',
+        blank=True, null=True,
+        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])]
+    )
+    image_url = models.CharField(max_length=500, blank=True, null=True)
+    issue_date = models.CharField(max_length=100, blank=True, null=True)
+    credential_url = models.URLField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+    @property
+    def display_image_url(self):
+        if self.certificate_image:
+            return self.certificate_image.url
+        return self.image_url or ''
+
+    def __str__(self):
+        return f"{self.title} - {self.issuer}"
     

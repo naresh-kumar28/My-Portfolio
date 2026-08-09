@@ -35,9 +35,9 @@
                             View Projects
                         </a>
 
-                        <a href="#team"
+                        <a href="#achievements"
                             class="flex-1 sm:w-44 text-center text-gray-900 dark:text-white font-bold border-2 border-gray-900 dark:border-gray-100 py-3 px-4 text-xs sm:text-sm md:text-base rounded-xl hover:text-white hover:border-[#bd69f5] hover:bg-[#bd69f5] hover:shadow-xl hover:scale-105 transition-all whitespace-nowrap">
-                            View Team
+                            Achievements
                         </a>
                     </div>
                 </div>
@@ -62,9 +62,9 @@
         {% include "includes/_projects_section.html" %}
     </section>
 
-    <!-- 4. TEAM SECTION -->
-    <section id="team" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
-        {% include "includes/_team_section.html" %}
+    <!-- 4. ACHIEVEMENTS SECTION -->
+    <section id="achievements" class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
+        {% include "includes/_achievements_section.html" %}
     </section>
 
     <!-- 5. CONTACT SECTION -->
@@ -146,7 +146,7 @@
             return;
         }
 
-        const phoneNumber = "917070509185"; 
+        const phoneNumber = "{{ WHATSAPP_NUMBER }}"; 
         const text = `Hello 👋%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMobile: ${encodeURIComponent(contact)}%0AMessage: ${encodeURIComponent(message)}`;
         window.open(`https://wa.me/${phoneNumber}?text=${text}`, "_blank");
     }

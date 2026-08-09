@@ -10,6 +10,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Naresh Dev | Portfolio {% endblock %}</title>
 
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{% block meta_description %}Naresh Kumar — Full-Stack Python & Django Developer specializing in building secure, scalable web applications and REST APIs.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}Naresh Kumar, Naresh Dev, Python Developer, Django Developer, Full Stack Developer, Web Development, Portfolio{% endblock %}">
+    <meta name="author" content="Naresh Kumar">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <!-- Open Graph (OG) Meta Tags for Social Sharing -->
+    <meta property="og:title" content="{% block og_title %}Naresh Dev | Full-Stack Django Developer Portfolio{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Explore projects, technical skills, and contact Naresh Kumar for web development opportunities.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'images/contact.png' %}{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}Naresh Dev | Portfolio{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Full-stack Python & Django developer portfolio.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% static 'images/contact.png' %}{% endblock %}">
+
     <!-- Tailwind CSS with Dark Mode Enabled -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
