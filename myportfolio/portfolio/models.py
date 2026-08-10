@@ -36,10 +36,25 @@ class Project(models.Model):
     github_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.project_image:
+            try:
+                url = self.project_image.url
+                if url and self.image_url != url:
+                    self.image_url = url
+                    self.project_image = None
+                    super().save(update_fields=['image_url', 'project_image'])
+            except Exception:
+                pass
+
     @property
     def display_image_url(self):
         if self.project_image:
-            return self.project_image.url
+            try:
+                return self.project_image.url
+            except Exception:
+                pass
         return self.image_url or ''
 
     def __str__(self):
@@ -59,12 +74,26 @@ class Certificate(models.Model):
     credential_url = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.certificate_image:
+            try:
+                url = self.certificate_image.url
+                if url and self.image_url != url:
+                    self.image_url = url
+                    self.certificate_image = None
+                    super().save(update_fields=['image_url', 'certificate_image'])
+            except Exception:
+                pass
+
     @property
     def display_image_url(self):
         if self.certificate_image:
-            return self.certificate_image.url
+            try:
+                return self.certificate_image.url
+            except Exception:
+                pass
         return self.image_url or ''
 
     def __str__(self):
         return f"{self.title} - {self.issuer}"
-    
