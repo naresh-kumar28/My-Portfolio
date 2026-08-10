@@ -15,7 +15,7 @@ class ProjectForm(forms.ModelForm):
 
     def clean_project_image(self):
         image = self.cleaned_data.get('project_image')
-        if image and image.size > 5 * 1024 * 1024:
+        if image and hasattr(image, 'size') and image.size > 5 * 1024 * 1024:
             raise forms.ValidationError("Image size cannot exceed 5MB.")
         return image
 

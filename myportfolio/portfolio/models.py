@@ -1,7 +1,15 @@
+import os
 from django.db import models
-from django.core.validators import FileExtensionValidator
+from django.core.exceptions import ValidationError
 
-# Create your models here.
+def validate_image_extension(value):
+    if not value or not hasattr(value, 'name') or not value.name:
+        return
+    ext = os.path.splitext(value.name)[1].lower().lstrip('.')
+    valid_extensions = ['jpg', 'jpeg', 'png', 'webp']
+    if ext and ext not in valid_extensions:
+        raise ValidationError(f"File extension '{ext}' is not allowed. Allowed extensions are: {', '.join(valid_extensions)}.")
+
 
 class Skill(models.Model):
     skill_name = models.CharField(max_length=100)
@@ -25,7 +33,7 @@ class Project(models.Model):
     project_image = models.ImageField(
         upload_to='project/images/',
         blank=True, null=True,
-        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])]
+        validators=[validate_image_extension]
     )
     image_url = models.URLField(max_length=500, blank=True, null=True) 
 
@@ -43,8 +51,7 @@ class Project(models.Model):
                 url = self.project_image.url
                 if url and self.image_url != url:
                     self.image_url = url
-                    self.project_image = None
-                    super().save(update_fields=['image_url', 'project_image'])
+                    super().save(update_fields=['image_url'])
             except Exception:
                 pass
 
@@ -67,7 +74,7 @@ class Certificate(models.Model):
     certificate_image = models.ImageField(
         upload_to='certificates/',
         blank=True, null=True,
-        validators=[FileExtensionValidator(allowed_extensions=['jpg', 'jpeg', 'png', 'webp'])]
+        validators=[validate_image_extension]
     )
     image_url = models.CharField(max_length=500, blank=True, null=True)
     issue_date = models.CharField(max_length=100, blank=True, null=True)
@@ -81,8 +88,7 @@ class Certificate(models.Model):
                 url = self.certificate_image.url
                 if url and self.image_url != url:
                     self.image_url = url
-                    self.certificate_image = None
-                    super().save(update_fields=['image_url', 'certificate_image'])
+                    super().save(update_fields=['image_url'])
             except Exception:
                 pass
 
