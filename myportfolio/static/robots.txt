@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /dashboard-x7k/
+Disallow: /accounts/
+Allow: /
+
+Sitemap: https://nareshdev.in/sitemap.xml

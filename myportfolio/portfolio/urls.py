@@ -29,4 +29,5 @@ urlpatterns = [
 
     # SEO Routes
     path('robots.txt', robots_txt, name='robots_txt'),
+    path('sitemap.xml', sitemap_xml, name='sitemap_xml'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

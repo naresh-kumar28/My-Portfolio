@@ -10,24 +10,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} Naresh Dev | Portfolio {% endblock %}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/favicon.png' %}">
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="{% block meta_description %}Naresh Kumar — Full-Stack Python & Django Developer specializing in building secure, scalable web applications and REST APIs.{% endblock %}">
-    <meta name="keywords" content="{% block meta_keywords %}Naresh Kumar, Naresh Dev, Python Developer, Django Developer, Full Stack Developer, Web Development, Portfolio{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}Naresh Kumar, Naresh Dev, Python Developer, Django Developer, Full Stack Developer, REST API Developer, Web Development Portfolio{% endblock %}">
     <meta name="author" content="Naresh Kumar">
+    <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
 
     <!-- Open Graph (OG) Meta Tags for Social Sharing -->
-    <meta property="og:title" content="{% block og_title %}Naresh Dev | Full-Stack Django Developer Portfolio{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Explore projects, technical skills, and contact Naresh Kumar for web development opportunities.{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}{% static 'images/contact.png' %}{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Naresh Dev — Full-Stack Python & Django Developer{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Explore web projects, technical skills, and contact Naresh Kumar for full-stack web development opportunities.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{% static 'images/og-banner.png' %}{% endblock %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
     <meta property="og:type" content="website">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{% block twitter_title %}Naresh Dev | Portfolio{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}Full-stack Python & Django developer portfolio.{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{% static 'images/contact.png' %}{% endblock %}">
+    <meta name="twitter:title" content="{% block twitter_title %}Naresh Dev — Full-Stack Django Developer{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}Full-stack Python & Django developer portfolio featuring scalable web apps and REST APIs.{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% static 'images/og-banner.png' %}{% endblock %}">
+
+    <!-- Google Search & Sitelinks Structured Data (JSON-LD Schema) -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Naresh Dev",
+        "alternateName": ["Naresh Kumar Portfolio", "Naresh Dev Portfolio"],
+        "url": "{{ request.scheme }}://{{ request.get_host }}/",
+        "description": "Full-Stack Python & Django Developer building scalable web applications and REST APIs.",
+        "publisher": {
+          "@type": "Person",
+          "name": "Naresh Kumar"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Naresh Kumar",
+        "alternateName": "Naresh Dev",
+        "jobTitle": "Full-Stack Python & Django Developer",
+        "url": "{{ request.scheme }}://{{ request.get_host }}/",
+        "sameAs": [
+          "https://github.com/naresh-kumar28"
+        ],
+        "knowsAbout": ["Python", "Django", "Django REST Framework", "MySQL", "PostgreSQL", "HTMX", "Alpine.js", "Tailwind CSS", "Razorpay Payment Integration"]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Site Navigation Sitelinks",
+        "itemListElement": [
+          {
+            "@type": "SiteNavigationElement",
+            "position": 1,
+            "name": "Home",
+            "description": "Naresh Dev official portfolio landing page",
+            "url": "{{ request.scheme }}://{{ request.get_host }}/#home"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 2,
+            "name": "About Me",
+            "description": "Background, technical skills, and backend engineering profile",
+            "url": "{{ request.scheme }}://{{ request.get_host }}/about/"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 3,
+            "name": "Featured Projects",
+            "description": "Full-stack web applications and live demos built with Django",
+            "url": "{{ request.scheme }}://{{ request.get_host }}/projects/"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 4,
+            "name": "Achievements & Certifications",
+            "description": "Verified credentials, hackathon awards, and milestone achievements",
+            "url": "{{ request.scheme }}://{{ request.get_host }}/achievements/"
+          },
+          {
+            "@type": "SiteNavigationElement",
+            "position": 5,
+            "name": "Contact Me",
+            "description": "Get in touch with Naresh Kumar for web development opportunities",
+            "url": "{{ request.scheme }}://{{ request.get_host }}/contact/"
+          }
+        ]
+      }
+    ]
+    </script>
 
     <!-- Tailwind CSS with Dark Mode Enabled -->
     <script src="https://cdn.tailwindcss.com"></script>

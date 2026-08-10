@@ -205,5 +205,33 @@ def certificateDelete(req, id):
         pass
     return redirect('certificate-add')
 
+
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Disallow: /dashboard-x7k/",
+        "Disallow: /accounts/",
+        "Allow: /",
+        f"Sitemap: {request.scheme}://{request.get_host()}/sitemap.xml"
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+def sitemap_xml(request):
+    domain = f"{request.scheme}://{request.get_host()}"
+    urls = [
+        f"{domain}/",
+        f"{domain}/about/",
+        f"{domain}/project/",
+        f"{domain}/achievements/",
+        f"{domain}/contact/",
+    ]
+    xml_content = ['<?xml version="1.0" encoding="UTF-8"?>']
+    xml_content.append('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    for u in urls:
+        xml_content.append(f'  <url><loc>{u}</loc><priority>1.0</priority></url>')
+    xml_content.append('</urlset>')
+    return HttpResponse("\n".join(xml_content), content_type="application/xml")
+
     
     
